@@ -1,14 +1,16 @@
-FROM tensorflow/tensorflow:1.15.4-gpu
+FROM tensorflow/tensorflow:1.15.4-gpu-py3
 RUN apt-get update
-RUN apt-get install -y python2.7 curl
-RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-RUN python2.7 get-pip.py
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
-RUN update-alternatives  --set python /usr/bin/python2.7
-RUN pip install jupyter
-RUN pip install pandas scikit-learn numpy matplotlib
-RUN pip install "tensorflow-gpu>=1.15,<2.0"
-RUN pip install --upgrade tensorflow-hub jupyterthemes
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends curl python3-pip pandoc texlive-xetex texlive-fonts-recommended texlive-generic-recommended
+RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
+RUN apt-get install -y nodejs
+RUN pip3 install --upgrade pip
+RUN pip3 install jupyter jedi==0.17.2
+RUN pip3 install pandas scikit-learn numpy matplotlib ipympl autopep8 jupyter_contrib_nbextensions
+RUN pip3 install "tensorflow-gpu>=1.15,<2.0"
+RUN pip3 install jupyterlab Pillow
+RUN pip3 install --upgrade tensorflow-hub jupyterthemes
 WORKDIR /home/
 COPY ./start_server.sh .start_server.sh
+COPY ./install_extension.sh .install_extension.sh
+RUN ./.install_extension.sh
 CMD ./.start_server.sh
