@@ -6,4 +6,6 @@ jupyter contrib nbextension install --system
 jupyter serverextension enable --py jupyterlab --sys-prefix
 jupyter nbextension enable --py --sys-prefix ipympl
 jupyter nbextension enable jupyter-black-master/jupyter-black
-jupyter nbextension enable Hinterland
+jupyter nbextension install --py jupyter_tabnine
+jupyter nbextension enable --py jupyter_tabnine
+jupyter serverextension enable --py jupyter_tabnine
