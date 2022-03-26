@@ -4,7 +4,7 @@ RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
 RUN apt-get install -y nodejs xvfb python-opengl
 RUN pip install jupyter jedi==0.17.2
 RUN pip install pandas scikit-learn numpy matplotlib ipympl autopep8 jupyter_contrib_nbextensions jupyter-tabnine python_language_server investpy gym transformers
-RUN pip install jupyterlab Pillow
+RUN pip install jupyterlab Pillow dl2
 RUN pip install --upgrade jupyterthemes pyrtfolio==0.4 
 RUN python -m pip install trendet --upgrade
 WORKDIR /home/
