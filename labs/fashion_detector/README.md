@@ -1,8 +1,8 @@
 # CNN model experiment for classification task
 
 ## Tools
-- ML framework : [pytorch]() & [Lightning]()
-- Visualization : [wandb]()
+- ML framework : [pytorch](https://pytorch.org/) & [Lightning](https://github.com/Lightning-AI/lightning)
+- Visualization : [wandb](https://wandb.ai/home)
 
 ## Performance (Tested on FashionMNIST Test Dataset)
 |Name|Avg. Accuracy| 
