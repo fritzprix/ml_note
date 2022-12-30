@@ -2,3 +2,4 @@ lightning_logs
 logs
 wandb
 data
+checkpoints
