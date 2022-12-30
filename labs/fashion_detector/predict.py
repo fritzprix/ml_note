@@ -18,43 +18,7 @@ from pytorch_lightning import loggers
 FASHION_MNIST_CLASSES = 10
 FASHION_MNIST_IMAGE_SIZE = 28
 
-def draw_confusion_matrix(axis: plt.Axes,confusion_matrix: torch.Tensor):
-    axis.imshow(confusion_matrix, cmap='Blues')
-    axis.set_xticks(range(confusion_matrix.shape[0]))
-    axis.set_yticks(range(confusion_matrix.shape[1]))
-    axis.set_label("Predicted label")
-    # axis.ylabel('True label')
 
-
-def draw_confusion_matrix_with_predictions(confusion_matrix: torch.Tensor, test_dataset, model):
-    # Draw the confusion matrix
-    plt.figure(figsize=(10,10))
-    plt.subplot(2,1,1)
-    plt.imshow(confusion_matrix, cmap='Blues')
-    plt.colorbar()
-    plt.xticks(range(confusion_matrix.shape[0]))
-    plt.yticks(range(confusion_matrix.shape[1]))
-    plt.xlabel('Predicted label')
-    plt.ylabel('True label')
-
-    # Choose random images from the test dataset
-    num_images = 9
-    random_indices = random.sample(range(len(test_dataset)), num_images)
-    random_images = [test_dataset[i][0] for i in random_indices]
-
-    # Predict the labels for the random images
-    random_predictions = model(random_images)
-    random_predictions = [pred.argmax().item() for pred in random_predictions]
-
-    # Display the random images with their predictions
-    plt.subplot(2,3,4)
-    for i in range(num_images):
-        plt.subplot(2,3,i+4)
-        plt.imshow(random_images[i].permute(1,2,0))
-        plt.title(f'Prediction: {random_predictions[i]}')
-        plt.axis('off')
-    plt.show()
-    
 def draw_confusion_matrix_with_predictions(confusion_matrix: torch.Tensor, pred: torch.Tensor, 
                                            labels: list, dataset, sampler_size: tuple):
     # Draw the confusion matrix
