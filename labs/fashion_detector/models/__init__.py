@@ -18,6 +18,7 @@ class SimpleFashionMNISTClassifier(pl.LightningModule):
         super().__init__()
         self.save_hyperparameters()
         self.lr = lr
+        self.cmat = torch.zeros(size=(num_classes, num_classes))
         self.network = nn.Sequential(
             nn.Conv2d(1, 16, kernel_size=2, stride=1), nn.ReLU(), # (n,1,28,28) => (n, 8, 27, 27)
             nn.Conv2d(16, 32, kernel_size=3, stride=1), nn.ReLU(), # (n,8,27,27) => (n, 16, 25, 25)
@@ -35,6 +36,7 @@ class SimpleFashionMNISTClassifier(pl.LightningModule):
         )
         
         self.metric = torchmetrics.Accuracy(task='multiclass', num_classes=num_classes)
+        self.confusion_mat = torchmetrics.ConfusionMatrix(task='multiclass', num_classes=num_classes)
         
     def forward(self, input):
         return self.network(input)
@@ -62,7 +64,9 @@ class SimpleFashionMNISTClassifier(pl.LightningModule):
         X, y = batch
         y_hat = self.network(X)
         loss = nn.functional.cross_entropy(y_hat, y)
-        acc = self.metric(y_hat.argmax(dim=1), y)
+        pred_labels = y_hat.argmax(dim=1)
+        acc = self.metric(pred_labels, y)
+        self.cmat += self.confusion_mat(pred_labels, y).to(self.cmat.device)
         self.log("test_loss", loss)
         self.log("test_acc", acc)
         
@@ -73,6 +77,7 @@ class ResNetBasedClassifier(pl.LightningModule):
         super().__init__()
         self.save_hyperparameters()
         self.lr = lr
+        self.cmat = torch.zeros(size=(num_class, num_class))
         resnet = models.resnet50(weights=models.ResNet50_Weights.IMAGENET1K_V2 if is_base_frozen else None)
         if is_base_frozen:
             for param in resnet.parameters():
@@ -88,6 +93,8 @@ class ResNetBasedClassifier(pl.LightningModule):
         
         self.loss = nn.CrossEntropyLoss()
         self.metric = torchmetrics.Accuracy('multiclass', num_classes=num_class)
+        self.confusion_mat = torchmetrics.ConfusionMatrix(task='multiclass', num_classes=num_class)
+
         
     def forward(self, X):
         return self.network(X)
@@ -113,6 +120,7 @@ class ResNetBasedClassifier(pl.LightningModule):
         val_acc = self.metric(y_hat.argmax(dim=1), y)
         self.log("test_loss", val_loss)
         self.log("test_acc", val_acc)
+        self.cmat += self.confusion_mat(y_hat, y).to(self.cmat.device)
     
     def configure_optimizers(self) -> optim.Optimizer:
         return optim.Adam(self.parameters(), lr=self.lr)
