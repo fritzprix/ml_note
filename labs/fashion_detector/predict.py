@@ -30,27 +30,27 @@ def benchmark(model_name: str, batch_size=128, device=torch.device('cpu'), sampl
     
     print(f"start benchmark.. batch_size={batch_size} on [{device}]")
     # load dataset
-    test_raw = datasets.FashionMNIST('./data', train=False)
-    test_dataset = datasets.FashionMNIST('./data', train=False, transform=Preprocess)
+    test_raw = datasets.FashionMNIST('./data', train=False, download=True)
+    test_dataset = datasets.FashionMNIST('./data', train=False, transform=Preprocess, download=True)
     test_dataloader = data.DataLoader(test_dataset, batch_size=batch_size, num_workers=os.cpu_count())
     
     num_of_classes = len(test_dataset.classes)
     
-    if model_name == 'resnet_cls':
+    if model_name == 'resnet':
         input_size = next(iter(test_dataset))[0].shape[2]
         model = ResNetBasedClassifier(input_size, num_of_classes)
         with wandb.init() as run:
             artifact = run.use_artifact('dwidlee/resnet_fashion_classifier/model-qmj4h546:v28', type='model')
             artifact_dir = artifact.download()
             model = model.load_from_checkpoint(f"{artifact_dir}/model.ckpt")
-    elif model_name == 'simple_conv':
+    elif model_name == 'simple':
         model = SimpleFashionMNISTClassifier(num_classes=num_of_classes)
         with wandb.init() as run:
             artifact = run.use_artifact('dwidlee/minimal_fashion_mnist_classifier/model-qgtrsjr5:v25', type='model')
             artifact_dir = artifact.download()
             model = model.load_from_checkpoint(f"{artifact_dir}/model.ckpt")
     else:
-        print(f"invalid model name : {model_name}")
+        print(f"invalid model name : {model_name} should be either \"simple\" or \"resnet\"")
         exit(1)
         
     model.to(device)
@@ -94,7 +94,7 @@ def main(args: argparse.Namespace):
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('simple Fashion MNIST classifier')
-    parser.add_argument('--model', default='simple_conv')
+    parser.add_argument('--model', default='simple')
     parser.add_argument('--bm', type=bool, help='benchmark with FashionMNISTtest dataset', default=True)
     parser.add_argument('--bs', type=int, help='batch size', default=128)
     parser.add_argument('--ckpt', default=None)
