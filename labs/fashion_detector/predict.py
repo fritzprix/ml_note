@@ -1,3 +1,4 @@
+
 import argparse
 import random
 from matplotlib import pyplot as plt
@@ -14,6 +15,8 @@ from torch.utils import data
 from models import SimpleFashionMNISTClassifier, Preprocess, ResNetBasedClassifier
 from pytorch_lightning import loggers
 
+FASHION_MNIST_CLASSES = 10
+FASHION_MNIST_IMAGE_SIZE = 28
 
 def draw_confusion_matrix(axis: plt.Axes,confusion_matrix: torch.Tensor):
     axis.imshow(confusion_matrix, cmap='Blues')
@@ -90,6 +93,30 @@ class ClassifierPipeline(pl.LightningModule):
     def forward(self, X: list):
         X = torch.cat([Preprocess(x).unsqueeze(0) for x in X])
         return self.model(X)
+    
+def load_bm_model(model_name, ckpt):
+    if model_name == 'resnet':
+        model = ResNetBasedClassifier(FASHION_MNIST_IMAGE_SIZE, FASHION_MNIST_CLASSES)
+        if args.ckpt is None:
+            with wandb.init() as run:
+                artifact = run.use_artifact('dwidlee/resnet_fashion_classifier/model-qmj4h546:v28', type='model')
+                artifact_dir = artifact.download()
+                model = model.load_from_checkpoint(f"{artifact_dir}/model.ckpt")
+    elif model_name == 'simple':
+        model = SimpleFashionMNISTClassifier(num_classes=FASHION_MNIST_CLASSES)
+        if args.ckpt is None:
+            with wandb.init() as run:
+                artifact = run.use_artifact('dwidlee/minimal_fashion_mnist_classifier/model-qgtrsjr5:v25', type='model')
+                artifact_dir = artifact.download()
+                model = model.load_from_checkpoint(f"{artifact_dir}/model.ckpt")
+    else:
+        print(f"invalid model name : {model_name} should be either \"simple\" or \"resnet\"")
+        exit(1)
+        
+    if ckpt is not None:
+        model = model.load_from_checkpoint(ckpt)
+    
+    return model
 
 def benchmark(model_name: str, batch_size=128, device=torch.device('cpu'), sampler_size=(4, 4)):
     
@@ -101,24 +128,7 @@ def benchmark(model_name: str, batch_size=128, device=torch.device('cpu'), sampl
     
     num_of_classes = len(test_dataset.classes)
     
-    if model_name == 'resnet':
-        input_size = next(iter(test_dataset))[0].shape[2]
-        model = ResNetBasedClassifier(input_size, num_of_classes)
-        with wandb.init() as run:
-            artifact = run.use_artifact('dwidlee/resnet_fashion_classifier/model-qmj4h546:v28', type='model')
-            artifact_dir = artifact.download()
-            model = model.load_from_checkpoint(f"{artifact_dir}/model.ckpt")
-    elif model_name == 'simple':
-        model = SimpleFashionMNISTClassifier(num_classes=num_of_classes)
-        with wandb.init() as run:
-            artifact = run.use_artifact('dwidlee/minimal_fashion_mnist_classifier/model-qgtrsjr5:v25', type='model')
-            artifact_dir = artifact.download()
-            model = model.load_from_checkpoint(f"{artifact_dir}/model.ckpt")
-    else:
-        print(f"invalid model name : {model_name} should be either \"simple\" or \"resnet\"")
-        exit(1)
-        
-    model.to(device)
+    model = load_bm_model(args.model, args.ckpt).to(device)
     model.eval()
     
     trainer = pl.Trainer(accelerator='gpu')
@@ -146,11 +156,11 @@ def main(args: argparse.Namespace):
     
     
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser('simple Fashion MNIST classifier')
-    parser.add_argument('--model', default='simple')
+    parser = argparse.ArgumentParser('predict.py')
+    parser.add_argument('--model', default='simple', help="model name should be either \"resnet\" or \"simple\"(default)")
     parser.add_argument('--bm', type=bool, help='benchmark with FashionMNISTtest dataset', default=True)
     parser.add_argument('--bs', type=int, help='batch size', default=128)
-    parser.add_argument('--ckpt', default=None)
+    parser.add_argument('--ckpt', default=None, help="model checkpoint file")
     args = parser.parse_args()
     print(f"{args}")
     main(args)
