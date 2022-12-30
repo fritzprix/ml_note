@@ -26,5 +26,5 @@ $ python simple.py --bm=True
 
 ## TO-DO
 
-- [x] Simple CNN model for classification task
-- [ ] ResNet (frozen) based classifier for FashionMNIST
+- [x] building a imple CNN model for classification task
+- [x] buinding a ResNet50 based classifier for FashionMNIST
