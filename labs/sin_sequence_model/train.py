@@ -10,21 +10,6 @@ from matplotlib.patches import Patch
 from tqdm import tqdm
 
 
-
-def predict_k_offset(model: pl.LightningModule, dataset, k:int):
-    dataloader = data.DataLoader(dataset)
-    preds = []
-    for batch in iter(dataloader):
-        X, y = batch
-        assert(isinstance(X, torch.Tensor))  # X (B,N,F)
-        assert(isinstance(y, torch.Tensor))
-        for _ in range(k):
-            y_hat = model(X)
-            X = torch.cat([X, y_hat], dim=1)
-        preds.append(y_hat)
-    return torch.cat(preds, dim=1).squeeze(0)
-
-
 def extract_labels(dataset: data.Dataset) -> torch.Tensor:
     return torch.cat([y for _,y in iter(dataset)])
 
@@ -46,9 +31,9 @@ def plot_datasplit(whole: data.Dataset, subsets: list[data.Dataset], colors: lis
 
 def main(args: argparse.Namespace):
     if args.model == 'ffn':
-        model = FFNAutoregressor(args.lr, args.steps, 1, 4)
+        model = FFNAutoregressor(args.lr, args.steps, 1, 2,num_hidden=3)
     elif args.model == 'gru':
-        model = GRUAutoregress(1)
+        model = GRUAutoregress(1, num_layers=3)
     
     
     if args.device == 'cpu':
@@ -79,8 +64,21 @@ def main(args: argparse.Namespace):
                        colors=['r', 'g', 'b'], 
                        labels=['train', 'validation', 'test'])
     
-        
-
+def train(model_name, model, dataset, batch_size, num_workers, max_epoch):
+    train_dataset, test_dataset, val_dataset = data.random_split(dataset, [0.4, 0.4, 0.2], generator=torch.Generator().manual_seed(6))
+    train_dataloader = data.DataLoader(train_dataset, batch_size=batch_size, num_workers=num_workers)
+    val_dataloader = data.DataLoader(val_dataset, batch_size=batch_size, num_workers=num_workers)
+    test_dataloader = data.DataLoader(test_dataset, batch_size=batch_size, num_workers=num_workers)
+    
+    early_stop = callbacks.EarlyStopping(monitor='val_loss', mode='min', patience=3, check_finite=True)
+    model_ckpt = callbacks.ModelCheckpoint(f"./model/{model_name}", 
+                                        filename='model-{epoch}-{val_loss:.2f}', 
+                                        monitor='val_loss', mode='min',
+                                        save_top_k=3)
+    
+    trainer = pl.Trainer(callbacks=[early_stop, model_ckpt], max_epochs=max_epoch, accelerator='gpu')
+    trainer.fit(model, train_dataloaders=train_dataloader, val_dataloaders=val_dataloader)
+    trainer.test(model, dataloaders=test_dataloader)
 
 if __name__ == '__main__':
     args_parser = argparse.ArgumentParser('train.py')
@@ -88,7 +86,7 @@ if __name__ == '__main__':
     args_parser.add_argument('--lr', type=float, default=1e-4)
     args_parser.add_argument('--steps', type=int, default=10)
     args_parser.add_argument('--batch', type=int, default=10)
-    args_parser.add_argument('--max_epoch', type=int, default=80)
+    args_parser.add_argument('--max_epoch', type=int, default=100)
     args_parser.add_argument('--device', choices=['cpu', 'gpu'], default='gpu')
     args_parser.add_argument('--split_summary', type=bool, default=False)
     args: argparse.Namespace = args_parser.parse_args()
