@@ -10,7 +10,7 @@ import utils
     
 
 def main(args: Namespace):
-    dataset = SinusoidalTimeSeries(n_samples=4000, noise=args.noise)
+    dataset = SinusoidalTimeSeries(0, n_samples=4000, noise=args.noise)
     
     ffn_model = FFNAutoregressor.load_from_checkpoint('./model/ffn/model.ckpt')
     gru_model = GRUAutoregress.load_from_checkpoint('./model/gru/model.ckpt')

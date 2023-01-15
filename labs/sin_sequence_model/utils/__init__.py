@@ -21,11 +21,8 @@ def predict_k_step_ahead(model: pl.LightningModule, dataset: data.Dataset, ahead
         X = X.to(device)
         model = model.to(device)
         model.eval()
-        y_hat = y
-        for _ in range(ahead_step):
-            y_hat = model(X)    # y_hat (N,1)
-            y_hat = y_hat.unsqueeze(1)
-            X = torch.cat([X, y_hat], dim=1)[:, 1:,:]
-        preds.append(y_hat)
-    return torch.cat(preds).reshape((-1))
+        y_hat = model.predict_k_step(X, ahead_step)
+        preds.append(y_hat[:,-1,:])
+    preds = torch.cat(preds)
+    return preds.squeeze(1)
     
