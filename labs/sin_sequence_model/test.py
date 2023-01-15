@@ -35,7 +35,6 @@ def main(args: Namespace):
         plt.legend()
         plt.show()
     
-    
 
 
 if __name__ == '__main__':

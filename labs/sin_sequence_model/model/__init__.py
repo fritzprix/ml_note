@@ -31,12 +31,11 @@ class GRUAutoregress(pl.LightningModule):
         return self.fc(gru_out)
     
     def predict_k_step(self, X, k_step):
-        hout = None
+        h_o = None
         for _ in range(k_step):
-            gru_out, hout = self.gru(X, hout)
+            gru_out, h_o = self.gru(X, h_o) # h_o (3, N, HIDDEN_SIZE)
             X = self.fc(gru_out)
         return X
-            
     
     
     def training_step(self, batch, _) -> torch.Tensor:
@@ -52,8 +51,12 @@ class GRUAutoregress(pl.LightningModule):
         assert(isinstance(y, torch.Tensor))
         y_hat = self(X)
         loss = nn.functional.mse_loss(y_hat, y)
-        self.log("val_loss", loss)
         return {"val_loss": loss}
+    
+    def validation_epoch_end(self, outputs):
+        val_loss = torch.stack([x["val_loss"] for x in outputs]).mean()
+        self.log("val_loss", val_loss)
+        return super().validation_epoch_end(outputs)
     
     def test_step(self, batch, _):
         X,y = batch
@@ -61,8 +64,12 @@ class GRUAutoregress(pl.LightningModule):
         assert(isinstance(y, torch.Tensor))
         y_hat = self(X)
         loss = nn.functional.mse_loss(y_hat, y)
-        self.log("test_loss", loss)
         return {"test_loss": loss}
+    
+    def test_epoch_end(self, outputs):
+        test_loss = torch.stack([x["test_loss"] for x in outputs]).mean()
+        self.log("test_loss", test_loss)
+        return super().test_epoch_end(outputs)
 
 
 
@@ -103,8 +110,12 @@ class FFNAutoregressor(pl.LightningModule):
         assert(isinstance(y, torch.Tensor))
         y_hat = self(X)
         loss = self.loss(y_hat, y)
-        self.log("train_loss", loss)
         return loss
+    
+    def training_epoch_end(self, outputs):
+        loss = torch.stack([x['loss'] for x in outputs]).mean()
+        self.log("train_loss", loss)
+        return super().training_epoch_end(outputs)
     
     def validation_step(self, batch, _):
         X, y = batch
@@ -112,8 +123,12 @@ class FFNAutoregressor(pl.LightningModule):
         assert(isinstance(y, torch.Tensor))
         y_hat = self(X)
         loss = nn.functional.mse_loss(y_hat, y)
-        self.log("val_loss", loss)
         return {"val_loss": loss}
+    
+    def validation_epoch_end(self, outputs):
+        loss = torch.stack([x["val_loss"] for x in outputs]).mean()
+        self.log("val_loss", loss)
+        return super().validation_epoch_end(outputs)
     
     def test_step(self, batch, _):
         X, y = batch
@@ -121,8 +136,12 @@ class FFNAutoregressor(pl.LightningModule):
         assert(isinstance(y, torch.Tensor))
         y_hat = self(X)
         loss = nn.functional.mse_loss(y_hat, y)
-        self.log("test_loss", loss)
         return {"test_loss": loss}
+    
+    def test_epoch_end(self, outputs):
+        loss = torch.stack([x["test_loss"] for x in outputs]).mean()
+        self.log("test_loss", loss)
+        return super().test_epoch_end(outputs)
 
 
 class SlicedDataset(data.Dataset):
