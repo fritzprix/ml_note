@@ -1,0 +1,128 @@
+{
+    "os": "Linux-5.15.79.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.10.8",
+    "heartbeatAt": "2023-01-20T16:03:49.973860",
+    "startedAt": "2023-01-20T16:03:49.242697",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--batch=100",
+        "--lr=1e-3"
+    ],
+    "state": "running",
+    "program": "/home/fritzprix/my_work/ml_note/labs/simple_ml/train.py",
+    "codePath": "labs/simple_ml/train.py",
+    "git": {
+        "remote": "git@github.com:fritzprix/ml_note.git",
+        "commit": "ff584723ed6ec30557fb08a1f996fdada97a410c"
+    },
+    "email": "innocentevil0914@gmail.com",
+    "root": "/home/fritzprix/my_work/ml_note",
+    "host": "DESKTOP-1MTP8SB",
+    "username": "fritzprix",
+    "executable": "/home/fritzprix/miniconda3/envs/directml/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 4491.466999999999,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 4491.467,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "total": 1006.853931427002,
+        "used": 118.98726272583008
+    },
+    "gpu": "NVIDIA GeForce RTX 3060",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3060",
+            "memory_total": 12884901888
+        }
+    ],
+    "memory": {
+        "total": 7.62921142578125
+    }
+}

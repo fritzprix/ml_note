@@ -1,0 +1,440 @@
+2023-01-21 01:31:21,909 INFO    StreamThr :17729 [internal.py:wandb_internal():87] W&B internal server running at pid: 17729, started at: 2023-01-21 01:31:21.909527
+2023-01-21 01:31:21,910 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status
+2023-01-21 01:31:21,919 INFO    WriterThread:17729 [datastore.py:open_for_write():85] open: ./wandb/run-20230121_013121-ybt5hcjo/run-ybt5hcjo.wandb
+2023-01-21 01:31:21,919 DEBUG   SenderThread:17729 [sender.py:send():334] send: header
+2023-01-21 01:31:21,921 DEBUG   SenderThread:17729 [sender.py:send():334] send: run
+2023-01-21 01:31:21,922 INFO    SenderThread:17729 [sender.py:_maybe_setup_resume():721] checking resume status for None/simple_glm_character/ybt5hcjo
+2023-01-21 01:31:22,574 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: check_version
+2023-01-21 01:31:22,575 INFO    SenderThread:17729 [dir_watcher.py:__init__():216] watching files in: ./wandb/run-20230121_013121-ybt5hcjo/files
+2023-01-21 01:31:22,575 INFO    SenderThread:17729 [sender.py:_start_run_threads():1065] run started: ybt5hcjo with start time 1674232281.918209
+2023-01-21 01:31:22,575 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: summary_record
+2023-01-21 01:31:22,575 INFO    SenderThread:17729 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-01-21 01:31:22,575 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: check_version
+2023-01-21 01:31:22,607 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: run_start
+2023-01-21 01:31:22,619 DEBUG   HandlerThread:17729 [system_info.py:__init__():31] System info init
+2023-01-21 01:31:22,619 DEBUG   HandlerThread:17729 [system_info.py:__init__():46] System info init done
+2023-01-21 01:31:22,620 INFO    HandlerThread:17729 [system_monitor.py:start():151] Starting system monitor
+2023-01-21 01:31:22,620 INFO    SystemMonitor:17729 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-01-21 01:31:22,620 INFO    HandlerThread:17729 [system_monitor.py:probe():172] Collecting system info
+2023-01-21 01:31:22,620 INFO    SystemMonitor:17729 [interfaces.py:start():168] Started cpu
+2023-01-21 01:31:22,621 INFO    SystemMonitor:17729 [interfaces.py:start():168] Started disk
+2023-01-21 01:31:22,621 INFO    SystemMonitor:17729 [interfaces.py:start():168] Started gpu
+2023-01-21 01:31:22,622 INFO    SystemMonitor:17729 [interfaces.py:start():168] Started memory
+2023-01-21 01:31:22,622 INFO    SystemMonitor:17729 [interfaces.py:start():168] Started network
+2023-01-21 01:31:22,629 DEBUG   HandlerThread:17729 [system_info.py:probe():195] Probing system
+2023-01-21 01:31:22,648 DEBUG   HandlerThread:17729 [system_info.py:_probe_git():180] Probing git
+2023-01-21 01:31:22,650 DEBUG   HandlerThread:17729 [system_info.py:_probe_git():188] Probing git done
+2023-01-21 01:31:22,650 DEBUG   HandlerThread:17729 [system_info.py:probe():241] Probing system done
+2023-01-21 01:31:22,650 DEBUG   HandlerThread:17729 [system_monitor.py:probe():181] {'os': 'Linux-5.15.79.1-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'python': '3.10.8', 'heartbeatAt': '2023-01-20T16:31:22.629425', 'startedAt': '2023-01-20T16:31:21.906204', 'docker': None, 'cuda': None, 'args': ('--batch=100',), 'state': 'running', 'program': '/home/fritzprix/my_work/ml_note/labs/simple_ml/train.py', 'codePath': 'labs/simple_ml/train.py', 'git': {'remote': 'git@github.com:fritzprix/ml_note.git', 'commit': 'ff584723ed6ec30557fb08a1f996fdada97a410c'}, 'email': 'innocentevil0914@gmail.com', 'root': '/home/fritzprix/my_work/ml_note', 'host': 'DESKTOP-1MTP8SB', 'username': 'fritzprix', 'executable': '/home/fritzprix/miniconda3/envs/directml/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 4491.466999999999, 'min': 0.0, 'max': 0.0}, 'cpu_freq_per_core': [{'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}, {'current': 4491.467, 'min': 0.0, 'max': 0.0}], 'disk': {'total': 1006.853931427002, 'used': 118.98845672607422}, 'gpu': 'NVIDIA GeForce RTX 3060', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3060', 'memory_total': 12884901888}], 'memory': {'total': 7.62921142578125}}
+2023-01-21 01:31:22,650 INFO    HandlerThread:17729 [system_monitor.py:probe():182] Finished collecting system info
+2023-01-21 01:31:22,650 INFO    HandlerThread:17729 [system_monitor.py:probe():185] Publishing system info
+2023-01-21 01:31:22,650 DEBUG   HandlerThread:17729 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-01-21 01:31:22,650 DEBUG   HandlerThread:17729 [system_info.py:_save_pip():67] Saving pip packages done
+2023-01-21 01:31:22,650 DEBUG   HandlerThread:17729 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2023-01-21 01:31:23,576 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_created():275] file/dir created: ./wandb/run-20230121_013121-ybt5hcjo/files/conda-environment.yaml
+2023-01-21 01:31:23,576 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_created():275] file/dir created: ./wandb/run-20230121_013121-ybt5hcjo/files/requirements.txt
+2023-01-21 01:31:23,576 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_created():275] file/dir created: ./wandb/run-20230121_013121-ybt5hcjo/files/wandb-summary.json
+2023-01-21 01:31:25,205 DEBUG   HandlerThread:17729 [system_info.py:_save_conda():86] Saving conda packages done
+2023-01-21 01:31:25,206 INFO    HandlerThread:17729 [system_monitor.py:probe():187] Finished publishing system info
+2023-01-21 01:31:25,219 DEBUG   SenderThread:17729 [sender.py:send():334] send: files
+2023-01-21 01:31:25,219 INFO    SenderThread:17729 [sender.py:_save_file():1319] saving file wandb-metadata.json with policy now
+2023-01-21 01:31:25,222 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: stop_status
+2023-01-21 01:31:25,222 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: stop_status
+2023-01-21 01:31:25,431 DEBUG   SenderThread:17729 [sender.py:send():334] send: telemetry
+2023-01-21 01:31:25,431 DEBUG   SenderThread:17729 [sender.py:send():334] send: metric
+2023-01-21 01:31:25,431 DEBUG   SenderThread:17729 [sender.py:send():334] send: telemetry
+2023-01-21 01:31:25,431 DEBUG   SenderThread:17729 [sender.py:send():334] send: metric
+2023-01-21 01:31:25,432 WARNING SenderThread:17729 [sender.py:send_metric():1270] Seen metric with glob (shouldn't happen)
+2023-01-21 01:31:25,576 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/conda-environment.yaml
+2023-01-21 01:31:25,576 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_created():275] file/dir created: ./wandb/run-20230121_013121-ybt5hcjo/files/wandb-metadata.json
+2023-01-21 01:31:25,916 INFO    Thread-16 :17729 [upload_job.py:push():143] Uploaded file /tmp/tmprng868zqwandb/7h0d8f75-wandb-metadata.json
+2023-01-21 01:31:27,432 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:31:29,577 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_created():275] file/dir created: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:31,578 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:32,456 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:31:35,515 DEBUG   SenderThread:17729 [sender.py:send():334] send: config
+2023-01-21 01:31:35,579 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:37,579 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:37,918 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:31:39,580 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:40,221 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:31:40,221 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:31:40,789 ERROR   gpu       :17729 [interfaces.py:monitor():129] Failed to sample metric: Unknown Error
+2023-01-21 01:31:41,580 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:43,242 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:31:43,581 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:45,222 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:31:45,581 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:46,939 ERROR   gpu       :17729 [interfaces.py:monitor():129] Failed to sample metric: The operating system has blocked the request.
+2023-01-21 01:31:47,582 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:48,678 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:31:49,583 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:50,223 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:31:51,583 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:52,969 ERROR   gpu       :17729 [interfaces.py:aggregate():146] Failed to serialize metric: The operating system has blocked the request.
+2023-01-21 01:31:52,975 ERROR   gpu       :17729 [interfaces.py:aggregate():146] Failed to serialize metric: The operating system has blocked the request.
+2023-01-21 01:31:52,982 ERROR   gpu       :17729 [interfaces.py:aggregate():146] Failed to serialize metric: The operating system has blocked the request.
+2023-01-21 01:31:53,584 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:53,857 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:31:54,585 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/config.yaml
+2023-01-21 01:31:55,223 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:31:55,585 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:57,585 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:31:59,270 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:31:59,587 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:00,224 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:32:01,591 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:03,592 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:04,620 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:32:05,225 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:32:05,592 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:07,593 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:09,593 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:10,022 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:32:10,226 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:32:11,277 ERROR   gpu       :17729 [interfaces.py:monitor():129] Failed to sample metric: Unknown Error
+2023-01-21 01:32:11,594 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:13,594 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:15,150 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:32:15,226 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:32:15,595 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:17,595 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:19,596 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:20,227 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:32:20,624 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:32:21,596 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:22,622 DEBUG   SystemMonitor:17729 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-01-21 01:32:22,623 DEBUG   SenderThread:17729 [sender.py:send():334] send: stats
+2023-01-21 01:32:23,402 ERROR   gpu       :17729 [interfaces.py:aggregate():146] Failed to serialize metric: The operating system has blocked the request.
+2023-01-21 01:32:23,410 ERROR   gpu       :17729 [interfaces.py:aggregate():146] Failed to serialize metric: The operating system has blocked the request.
+2023-01-21 01:32:23,419 ERROR   gpu       :17729 [interfaces.py:aggregate():146] Failed to serialize metric: The operating system has blocked the request.
+2023-01-21 01:32:23,427 ERROR   gpu       :17729 [interfaces.py:aggregate():146] Failed to serialize metric: The operating system has blocked the request.
+2023-01-21 01:32:23,597 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:25,228 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:32:25,597 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:25,787 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:32:27,598 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:29,599 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:30,228 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:32:31,009 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:32:31,599 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:33,600 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:35,229 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:32:36,271 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:32:36,600 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:37,627 ERROR   gpu       :17729 [interfaces.py:monitor():129] Failed to sample metric: Unknown Error
+2023-01-21 01:32:37,633 ERROR   gpu       :17729 [interfaces.py:monitor():129] Failed to sample metric: Unknown Error
+2023-01-21 01:32:38,601 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:40,230 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:32:40,602 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:41,413 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:32:42,602 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:44,603 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:45,230 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:32:46,603 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:46,896 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:32:48,604 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:50,231 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:32:50,604 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:51,964 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:32:52,608 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:52,630 DEBUG   SenderThread:17729 [sender.py:send():334] send: stats
+2023-01-21 01:32:54,609 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:55,232 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:32:56,613 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:32:57,390 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:32:58,614 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:00,087 ERROR   gpu       :17729 [interfaces.py:monitor():129] Failed to sample metric: Unknown Error
+2023-01-21 01:33:00,233 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:33:00,614 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:02,615 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:02,645 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:33:04,615 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:05,233 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:33:06,616 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:07,900 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:33:08,621 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:10,234 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:33:10,621 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:12,622 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:13,254 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:33:14,623 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:15,235 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:33:16,623 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:18,417 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:33:18,623 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:20,235 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:33:20,624 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:22,624 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:22,630 DEBUG   SenderThread:17729 [sender.py:send():334] send: stats
+2023-01-21 01:33:23,817 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:33:24,418 ERROR   gpu       :17729 [interfaces.py:aggregate():146] Failed to serialize metric: The operating system has blocked the request.
+2023-01-21 01:33:24,625 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:25,236 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:33:26,625 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:28,625 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:28,963 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:33:30,239 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:33:30,626 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:32,627 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:34,144 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:33:34,627 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:35,239 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:33:36,628 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:38,576 ERROR   gpu       :17729 [interfaces.py:monitor():129] Failed to sample metric: Unknown Error
+2023-01-21 01:33:38,584 ERROR   gpu       :17729 [interfaces.py:monitor():129] Failed to sample metric: Unknown Error
+2023-01-21 01:33:38,628 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:39,491 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:33:40,238 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:33:40,629 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:42,629 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:44,630 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:44,808 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:33:45,239 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:33:46,630 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:48,631 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:49,994 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:33:50,239 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:33:50,631 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:52,630 DEBUG   SenderThread:17729 [sender.py:send():334] send: stats
+2023-01-21 01:33:52,632 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:54,632 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:55,183 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:33:55,241 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:33:56,633 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:33:58,633 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:00,243 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:34:00,474 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:34:00,634 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:02,635 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:04,636 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:05,244 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:34:05,713 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:34:06,636 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:08,637 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:09,133 ERROR   gpu       :17729 [interfaces.py:monitor():129] Failed to sample metric: Unknown Error
+2023-01-21 01:34:10,245 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:34:10,637 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:10,767 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:34:12,639 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:14,640 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:15,246 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:34:15,835 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:34:16,640 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:18,641 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:20,246 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:34:20,644 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:20,965 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:34:22,631 DEBUG   SenderThread:17729 [sender.py:send():334] send: stats
+2023-01-21 01:34:22,649 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:24,651 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:25,248 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:34:25,325 ERROR   gpu       :17729 [interfaces.py:aggregate():146] Failed to serialize metric: The operating system has blocked the request.
+2023-01-21 01:34:25,331 ERROR   gpu       :17729 [interfaces.py:aggregate():146] Failed to serialize metric: The operating system has blocked the request.
+2023-01-21 01:34:26,061 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:34:26,651 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:27,414 ERROR   gpu       :17729 [interfaces.py:monitor():129] Failed to sample metric: Unknown Error
+2023-01-21 01:34:28,652 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:30,248 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:34:30,652 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:31,203 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:34:32,653 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:34,654 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:34,972 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: partial_history
+2023-01-21 01:34:34,973 DEBUG   SenderThread:17729 [sender.py:send():334] send: metric
+2023-01-21 01:34:34,973 DEBUG   SenderThread:17729 [sender.py:send():334] send: metric
+2023-01-21 01:34:34,973 DEBUG   SenderThread:17729 [sender.py:send():334] send: history
+2023-01-21 01:34:34,974 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: summary_record
+2023-01-21 01:34:34,974 INFO    SenderThread:17729 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-01-21 01:34:34,988 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: partial_history
+2023-01-21 01:34:34,988 DEBUG   SenderThread:17729 [sender.py:send():334] send: metric
+2023-01-21 01:34:34,989 DEBUG   SenderThread:17729 [sender.py:send():334] send: history
+2023-01-21 01:34:34,989 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: summary_record
+2023-01-21 01:34:34,989 INFO    SenderThread:17729 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-01-21 01:34:35,249 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:34:35,654 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/wandb-summary.json
+2023-01-21 01:34:36,655 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:36,717 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:34:38,656 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:40,250 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:34:40,656 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:41,855 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:34:42,657 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:44,658 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:45,251 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:34:46,658 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:46,995 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:34:48,660 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:50,252 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:34:50,660 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:52,134 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:34:52,631 DEBUG   SenderThread:17729 [sender.py:send():334] send: stats
+2023-01-21 01:34:52,661 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:54,661 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:55,252 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:34:55,725 ERROR   gpu       :17729 [interfaces.py:aggregate():146] Failed to serialize metric: The operating system has blocked the request.
+2023-01-21 01:34:55,732 ERROR   gpu       :17729 [interfaces.py:aggregate():146] Failed to serialize metric: The operating system has blocked the request.
+2023-01-21 01:34:56,662 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:34:57,416 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:34:58,662 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:00,254 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:35:00,663 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:02,664 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:02,697 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:35:03,664 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/config.yaml
+2023-01-21 01:35:04,665 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:05,254 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:35:06,665 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:08,649 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:35:08,665 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:09,985 ERROR   gpu       :17729 [interfaces.py:monitor():129] Failed to sample metric: Unknown Error
+2023-01-21 01:35:10,255 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:35:10,666 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:12,666 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:13,747 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:35:14,667 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:15,256 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:35:16,667 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:18,073 ERROR   gpu       :17729 [interfaces.py:monitor():129] Failed to sample metric: Unknown Error
+2023-01-21 01:35:18,081 ERROR   gpu       :17729 [interfaces.py:monitor():129] Failed to sample metric: Unknown Error
+2023-01-21 01:35:18,668 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:18,918 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:35:20,258 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: keepalive
+2023-01-21 01:35:20,669 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:22,632 DEBUG   SenderThread:17729 [sender.py:send():334] send: stats
+2023-01-21 01:35:22,670 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:24,010 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:35:24,012 DEBUG   SenderThread:17729 [sender.py:send():334] send: exit
+2023-01-21 01:35:24,012 INFO    SenderThread:17729 [sender.py:send_exit():557] handling exit code: 0
+2023-01-21 01:35:24,012 INFO    SenderThread:17729 [sender.py:send_exit():559] handling runtime: 241
+2023-01-21 01:35:24,012 INFO    SenderThread:17729 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-01-21 01:35:24,012 INFO    SenderThread:17729 [sender.py:send_exit():565] send defer
+2023-01-21 01:35:24,013 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:24,013 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 0
+2023-01-21 01:35:24,013 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:24,013 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 0
+2023-01-21 01:35:24,013 INFO    SenderThread:17729 [sender.py:transition_state():585] send defer: 1
+2023-01-21 01:35:24,013 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:24,013 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 1
+2023-01-21 01:35:24,013 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:24,013 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 1
+2023-01-21 01:35:24,013 INFO    SenderThread:17729 [sender.py:transition_state():585] send defer: 2
+2023-01-21 01:35:24,013 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:24,013 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 2
+2023-01-21 01:35:24,013 INFO    HandlerThread:17729 [system_monitor.py:finish():161] Stopping system monitor
+2023-01-21 01:35:24,013 DEBUG   SystemMonitor:17729 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2023-01-21 01:35:24,013 DEBUG   SystemMonitor:17729 [system_monitor.py:_start():141] Publishing last batch of metrics
+2023-01-21 01:35:24,014 INFO    HandlerThread:17729 [interfaces.py:finish():175] Joined cpu
+2023-01-21 01:35:24,014 INFO    HandlerThread:17729 [interfaces.py:finish():175] Joined disk
+2023-01-21 01:35:24,021 INFO    HandlerThread:17729 [interfaces.py:finish():175] Joined gpu
+2023-01-21 01:35:24,021 INFO    HandlerThread:17729 [interfaces.py:finish():175] Joined memory
+2023-01-21 01:35:24,021 INFO    HandlerThread:17729 [interfaces.py:finish():175] Joined network
+2023-01-21 01:35:24,021 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:24,021 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 2
+2023-01-21 01:35:24,021 INFO    SenderThread:17729 [sender.py:transition_state():585] send defer: 3
+2023-01-21 01:35:24,022 DEBUG   SenderThread:17729 [sender.py:send():334] send: stats
+2023-01-21 01:35:24,022 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:24,022 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 3
+2023-01-21 01:35:24,022 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:24,022 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 3
+2023-01-21 01:35:24,022 INFO    SenderThread:17729 [sender.py:transition_state():585] send defer: 4
+2023-01-21 01:35:24,022 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:24,022 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 4
+2023-01-21 01:35:24,022 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:24,022 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 4
+2023-01-21 01:35:24,022 INFO    SenderThread:17729 [sender.py:transition_state():585] send defer: 5
+2023-01-21 01:35:24,022 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:24,022 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 5
+2023-01-21 01:35:24,022 DEBUG   SenderThread:17729 [sender.py:send():334] send: summary
+2023-01-21 01:35:24,023 INFO    SenderThread:17729 [sender.py:_save_file():1319] saving file wandb-summary.json with policy end
+2023-01-21 01:35:24,023 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:24,023 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 5
+2023-01-21 01:35:24,023 INFO    SenderThread:17729 [sender.py:transition_state():585] send defer: 6
+2023-01-21 01:35:24,023 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:24,023 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 6
+2023-01-21 01:35:24,023 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:24,023 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 6
+2023-01-21 01:35:24,023 INFO    SenderThread:17729 [sender.py:transition_state():585] send defer: 7
+2023-01-21 01:35:24,023 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:35:24,023 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:24,023 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 7
+2023-01-21 01:35:24,023 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:24,023 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 7
+2023-01-21 01:35:24,670 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:24,670 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/wandb-summary.json
+2023-01-21 01:35:25,012 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: poll_exit
+2023-01-21 01:35:25,670 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:25,952 INFO    SenderThread:17729 [sender.py:transition_state():585] send defer: 8
+2023-01-21 01:35:25,952 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: poll_exit
+2023-01-21 01:35:25,952 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:25,952 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 8
+2023-01-21 01:35:25,952 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:25,952 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 8
+2023-01-21 01:35:25,960 INFO    SenderThread:17729 [sender.py:transition_state():585] send defer: 9
+2023-01-21 01:35:25,961 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:25,961 DEBUG   SenderThread:17729 [sender.py:send():334] send: artifact
+2023-01-21 01:35:25,961 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 9
+2023-01-21 01:35:26,013 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: poll_exit
+2023-01-21 01:35:26,671 INFO    Thread-13 :17729 [dir_watcher.py:_on_file_modified():292] file/dir modified: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:27,067 INFO    SenderThread:17729 [sender.py:send_artifact():1415] sent artifact job-git_github.com_fritzprix_ml_note.git_labs_simple_ml_train.py - {'id': 'QXJ0aWZhY3Q6MzM0MTUzMTM1', 'digest': 'fa52aa76bbad7afea23029d5fbaf736c', 'state': 'COMMITTED', 'aliases': [{'artifactCollectionName': 'job-git_github.com_fritzprix_ml_note.git_labs_simple_ml_train.py', 'alias': 'v0'}], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjUwMTQxNjI5', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6MzM0MTUzNjEx', 'versionIndex': 1}}, 'version': 'v0'}
+2023-01-21 01:35:27,067 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:27,067 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 9
+2023-01-21 01:35:27,067 INFO    SenderThread:17729 [dir_watcher.py:finish():362] shutting down directory watcher
+2023-01-21 01:35:27,671 INFO    SenderThread:17729 [dir_watcher.py:finish():392] scan: ./wandb/run-20230121_013121-ybt5hcjo/files
+2023-01-21 01:35:27,672 INFO    SenderThread:17729 [dir_watcher.py:finish():406] scan save: ./wandb/run-20230121_013121-ybt5hcjo/files/wandb-summary.json wandb-summary.json
+2023-01-21 01:35:27,672 INFO    SenderThread:17729 [dir_watcher.py:finish():406] scan save: ./wandb/run-20230121_013121-ybt5hcjo/files/config.yaml config.yaml
+2023-01-21 01:35:27,673 INFO    SenderThread:17729 [dir_watcher.py:finish():406] scan save: ./wandb/run-20230121_013121-ybt5hcjo/files/output.log output.log
+2023-01-21 01:35:27,673 INFO    SenderThread:17729 [dir_watcher.py:finish():406] scan save: ./wandb/run-20230121_013121-ybt5hcjo/files/wandb-metadata.json wandb-metadata.json
+2023-01-21 01:35:27,674 INFO    SenderThread:17729 [dir_watcher.py:finish():406] scan save: ./wandb/run-20230121_013121-ybt5hcjo/files/requirements.txt requirements.txt
+2023-01-21 01:35:27,675 INFO    SenderThread:17729 [dir_watcher.py:finish():406] scan save: ./wandb/run-20230121_013121-ybt5hcjo/files/conda-environment.yaml conda-environment.yaml
+2023-01-21 01:35:27,675 INFO    SenderThread:17729 [sender.py:transition_state():585] send defer: 10
+2023-01-21 01:35:27,675 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: poll_exit
+2023-01-21 01:35:27,676 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:27,677 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 10
+2023-01-21 01:35:27,678 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:27,678 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 10
+2023-01-21 01:35:27,678 INFO    SenderThread:17729 [file_pusher.py:finish():160] shutting down file pusher
+2023-01-21 01:35:28,359 INFO    Thread-18 :17729 [upload_job.py:push():143] Uploaded file ./wandb/run-20230121_013121-ybt5hcjo/files/config.yaml
+2023-01-21 01:35:28,367 INFO    Thread-20 :17729 [upload_job.py:push():143] Uploaded file ./wandb/run-20230121_013121-ybt5hcjo/files/requirements.txt
+2023-01-21 01:35:28,368 INFO    Thread-19 :17729 [upload_job.py:push():143] Uploaded file ./wandb/run-20230121_013121-ybt5hcjo/files/output.log
+2023-01-21 01:35:28,385 INFO    Thread-17 :17729 [upload_job.py:push():143] Uploaded file ./wandb/run-20230121_013121-ybt5hcjo/files/wandb-summary.json
+2023-01-21 01:35:29,679 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: status_report
+2023-01-21 01:35:30,104 INFO    Thread-21 :17729 [upload_job.py:push():143] Uploaded file ./wandb/run-20230121_013121-ybt5hcjo/files/conda-environment.yaml
+2023-01-21 01:35:30,305 INFO    Thread-12 (_thread_body):17729 [sender.py:transition_state():585] send defer: 11
+2023-01-21 01:35:30,305 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:30,305 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 11
+2023-01-21 01:35:30,305 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:30,305 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 11
+2023-01-21 01:35:30,305 INFO    SenderThread:17729 [file_pusher.py:join():165] waiting for file pusher
+2023-01-21 01:35:30,305 INFO    SenderThread:17729 [sender.py:transition_state():585] send defer: 12
+2023-01-21 01:35:30,305 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:30,305 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 12
+2023-01-21 01:35:30,306 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:30,306 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 12
+2023-01-21 01:35:30,986 INFO    SenderThread:17729 [sender.py:transition_state():585] send defer: 13
+2023-01-21 01:35:30,986 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:30,995 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 13
+2023-01-21 01:35:30,996 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:30,996 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 13
+2023-01-21 01:35:30,996 INFO    SenderThread:17729 [sender.py:transition_state():585] send defer: 14
+2023-01-21 01:35:30,996 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: defer
+2023-01-21 01:35:30,996 DEBUG   SenderThread:17729 [sender.py:send():334] send: final
+2023-01-21 01:35:30,996 INFO    HandlerThread:17729 [handler.py:handle_request_defer():170] handle defer: 14
+2023-01-21 01:35:30,996 DEBUG   SenderThread:17729 [sender.py:send():334] send: footer
+2023-01-21 01:35:30,996 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: defer
+2023-01-21 01:35:30,996 INFO    SenderThread:17729 [sender.py:send_request_defer():581] handle sender defer: 14
+2023-01-21 01:35:30,997 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: poll_exit
+2023-01-21 01:35:30,997 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: server_info
+2023-01-21 01:35:30,997 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: poll_exit
+2023-01-21 01:35:30,997 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: get_summary
+2023-01-21 01:35:30,997 DEBUG   SenderThread:17729 [sender.py:send_request():361] send_request: server_info
+2023-01-21 01:35:30,997 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: sampled_history
+2023-01-21 01:35:31,209 INFO    MainThread:17729 [wandb_run.py:_footer_history_summary_info():3427] rendering history
+2023-01-21 01:35:31,209 INFO    MainThread:17729 [wandb_run.py:_footer_history_summary_info():3459] rendering summary
+2023-01-21 01:35:31,209 INFO    MainThread:17729 [wandb_run.py:_footer_sync_info():3383] logging synced files
+2023-01-21 01:35:31,209 DEBUG   HandlerThread:17729 [handler.py:handle_request():144] handle_request: shutdown
+2023-01-21 01:35:31,209 INFO    HandlerThread:17729 [handler.py:finish():841] shutting down handler
+2023-01-21 01:35:31,997 INFO    WriterThread:17729 [datastore.py:close():299] close: ./wandb/run-20230121_013121-ybt5hcjo/run-ybt5hcjo.wandb
+2023-01-21 01:35:32,209 INFO    SenderThread:17729 [sender.py:finish():1491] shutting down sender
+2023-01-21 01:35:32,209 INFO    SenderThread:17729 [file_pusher.py:finish():160] shutting down file pusher
+2023-01-21 01:35:32,209 INFO    SenderThread:17729 [file_pusher.py:join():165] waiting for file pusher

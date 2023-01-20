@@ -1,0 +1,26 @@
+/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loggers/wandb.py:396: UserWarning: There is a wandb run already in progress and newly created instances of `WandbLogger` will reuse this run. If this is not desired, call `wandb.finish()` before instantiating `WandbLogger`.
+  rank_zero_warn(
+Found cached dataset wikitext (/home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00, 1319.66it/s]
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-fa4a4a4c04b58af6.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-73a6c9a57c86a67d.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-18725908dcba4345.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-0815980a29664724.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-112469153db666a2.arrow
+Found cached dataset wikitext (/home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00, 2184.15it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00<00:00, 167.27ba/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 2461/2461 [00:00<00:00, 34668.56ex/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 2461/2461 [00:00<00:00, 58996.37ex/s]
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████| 2461/2461 [00:00<00:00, 8262.20ex/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 2461/2461 [00:00<00:00, 38336.23ex/s]
+Traceback (most recent call last):
+  File "/home/fritzprix/my_work/ml_note/labs/simple_ml/train.py", line 51, in <module>
+    main(arg_parser.parse_args())
+  File "/home/fritzprix/my_work/ml_note/labs/simple_ml/train.py", line 27, in main
+    model = GRUML(vocab=train_dataset.vocab, lr=args.lr)
+  File "/home/fritzprix/my_work/ml_note/labs/simple_ml/model/__init__.py", line 20, in __init__
+    self.embedding = nn.Embedding(self.input_size, self.input_size, padding_idx=vocab[padding_str])
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/torchtext/vocab/vocab.py", line 65, in __getitem__
+    return self.vocab[token]
+RuntimeError: Token <PAD> not found and default index is not set
