@@ -1,75 +1,99 @@
 import pytorch_lightning as pl
 import torch
+from torch import nn
 from torch.nn import functional as F
 from torch.utils import data
+from torchtext import vocab, functional as TF
+from torchtext import transforms
+import torchtext
 import datasets
 
 
 class GRUML(pl.LightningModule):
-    def __init__(self, vocab_size, num_hidden=10, num_layers=2):
+    def __init__(self, input_size, lr:float = 1e-4,  num_hidden=40, num_layers=3, use_sliding=True, padding_id=0):
         super().__init__()
         self.save_hyperparameters()
-        self.vocab_size = vocab_size
-        self.net = torch.nn.GRU(input_size=vocab_size, 
-                                hidden_size=num_hidden, 
-                                num_layers=num_layers)
+        self.input_size = input_size
+        self.padding_id = padding_id
+        self.lr = lr
+        self.gru = nn.GRU(input_size=input_size, 
+                          hidden_size=num_hidden, num_layers=num_layers, batch_first=True)
+        
+        self.fc = nn.Linear(num_hidden, input_size)
+        self.loss = torch.nn.CrossEntropyLoss(ignore_index=self.padding_id)
+        self.use_sliding = use_sliding
+        
         
     def forward(self,X):
-        embedding = F.one_hot(X, self.vocab_size)
-        y_hat = self.net(embedding)
-
-class Vocab:
-    def __init__(self, bow: set):
-        sorted_bow = sorted(bow)
-        self.enc_dict = dict()
-        self.dec_dict = dict()
-        for index, c in enumerate(sorted_bow):
-            self.enc_dict[c] = index
-            self.dec_dict[index] = c
+        emb = F.one_hot(X, self.input_size).float()
+        out, _ = self.gru(emb)
+        return self.fc(out)
     
-    def __getitem__(self,index):
-        return self.enc_dict[index]
+    def training_step(self, batch, batch_idx) -> torch.Tensor:
+        seq = batch
+        losses = []
+        for subsq_len in range(2, seq.shape[1] - 1, 1):
+            X = seq[:, 0: subsq_len]
+            y = seq[:, 1: subsq_len + 1]
+            y_hat = self(X)
+            assert isinstance(y_hat, torch.Tensor)
+            assert isinstance(y, torch.Tensor)
+            loss = self.loss(y_hat.reshape(-1, y_hat.shape[-1]), y.reshape(-1))
+            losses.append(loss)
+        return torch.stack(losses).mean()
     
-    def decode(self, index):
-        return self.dec_dict[index]
-    
-    
-class NullTrimmer():
-    def __init__(self, max_length):
-        self.max_length = max_length
+    def training_epoch_end(self, outputs):
+        avg = torch.stack([o['loss'] for o in outputs]).mean()
+        self.log("train_loss", avg)
         
-    def __call__(self, s: str):
-        pad_count = self.max_length - len(s)
-        if pad_count > 0:
-            return s + ''.join([' ' for _ in range(pad_count)])
-        elif pad_count < 0:
-            return s[:self.max_length]
-        else:
-            return s
+    
+    def validation_step(self, batch, _):
+        seq = batch
+        X, y = seq[:, 0: -2], seq[:, 1:-1]
+        y_hat = self(X)
+        assert isinstance(y_hat, torch.Tensor)
+        assert isinstance(y, torch.Tensor)
+        loss = self.loss(y_hat.reshape(-1, y_hat.shape[-1]), y.reshape(-1))
+        return {"loss": loss}
+    
+    def validation_epoch_end(self, outputs: list[dict]):
+        avg_loss = torch.stack([o['loss'] for o in outputs]).mean()
+        self.log("val_loss", avg_loss)
+        
+    def configure_optimizers(self) -> torch.optim.Optimizer:
+        return torch.optim.Adam(self.parameters(), self.lr)
+        
+
     
 class WikiDataset(data.Dataset):
         
     def __init__(self, n_steps:int, target:str='train'):
         super().__init__()
         self.n_steps = n_steps
-        assert target in {"train", "test", "validate"}
+        assert target in {"train", "test", "validation"}
         data = datasets.load_dataset('wikitext', 'wikitext-2-v1')[target]
         chars = set()
         for line in data['text']:
             chars = chars.union(set(line))
-            
-        self.vocab = Vocab(chars)
-        trimmer = NullTrimmer(n_steps)
-        data = data.map(lambda x: {'trimmed':trimmer(x)}, input_columns='text')
-        self.data = data.map(lambda x: {'emb':[self.vocab[c] for c in x]}, input_columns='trimmed')
-        self.data.set_format('torch', columns=['emb', 'text'])
-        print(self.data[0])
+        
+        self.vocab = vocab.build_vocab_from_iterator(chars, specials=['<pad>', '<unk>'])
+        
+        self.data = data.filter(lambda x: len(x) > 0, input_columns='text') \
+                .map(lambda x: {'text': x.strip()}, input_columns='text') \
+                .map(lambda x: {"token_id": [self.vocab[c] for c in x]}, input_columns='text') \
+                .map(lambda x: {"token_id": TF.truncate(x, n_steps)}, input_columns='token_id') \
+                .map(lambda x: {"length": len(x)}, input_columns='token_id')
+                
+        self.data.set_format('torch', columns=['text', 'length', 'token_id'])
     
     def __getitem__(self, index):
         return self.data[index]
     
     def __len__(self):
         return len(self.data)
+    
+    def collater(self):
+        return lambda batch: TF.pad_sequence([e['token_id'] for e in batch], batch_first=True, padding_value=self.vocab['<pad>'])
         
         
         

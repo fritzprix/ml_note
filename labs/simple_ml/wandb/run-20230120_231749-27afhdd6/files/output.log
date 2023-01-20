@@ -1,0 +1,94 @@
+Found cached dataset wikitext (/home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00, 1262.08it/s]
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-fa4a4a4c04b58af6.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-73a6c9a57c86a67d.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-bc1a7a2911056c2f.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-9634a13e6ffdf5e0.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-9336f4e4a9353ff3.arrow
+Found cached dataset wikitext (/home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00, 2208.69it/s]
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-29738f630967d57d.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-b79c4c83bb14680a.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-a1225151a901c50c.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-9d81e13af7799ec0.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-10d9f5da79a9bb60.arrow
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+  | Name      | Type      | Params
+----------------------------------------
+0 | gru       | GRU       | 9.6 K
+1 | fc        | Linear    | 3.1 K
+2 | embedding | Embedding | 81.2 K
+3 | loss      | MSELoss   | 0
+----------------------------------------
+12.7 K    Trainable params
+81.2 K    Non-trainable params
+93.9 K    Total params
+0.376     Total estimated model params size (MB)
+Sanity Checking DataLoader 0: 100%|████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00, 11.73it/s][{'loss': tensor(0.9583, device='cuda:0')}, {'loss': tensor(0.9560, device='cuda:0')}]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Epoch 0:  93%|████████████████████████████████████████████████████████████████▎    | 123/132 [01:19<00:05,  1.55it/s, loss=0.937, v_num=hdd6]
+
+Epoch 0: 100%|█████████████████████████████████████████████████████████████████████| 132/132 [01:19<00:00,  1.67it/s, loss=0.937, v_num=hdd6]
+Traceback (most recent call last):
+  File "/home/fritzprix/my_work/ml_note/labs/simple_ml/train.py", line 46, in <module>
+    main(arg_parser.parse_args())
+  File "/home/fritzprix/my_work/ml_note/labs/simple_ml/train.py", line 33, in main
+    trainer.fit(model, train_dataloaders=train_dataloader, val_dataloaders=val_dataloader)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 603, in fit
+    call._call_and_handle_interrupt(
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/call.py", line 38, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 645, in _fit_impl
+    self._run(model, ckpt_path=self.ckpt_path)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 1098, in _run
+    results = self._run_stage()
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 1177, in _run_stage
+    self._run_train()
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 1200, in _run_train
+    self.fit_loop.run()
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
+    self.on_advance_end()
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/fit_loop.py", line 285, in on_advance_end
+    raise MisconfigurationException(
+lightning_lite.utilities.exceptions.MisconfigurationException: `training_epoch_end` expects a return of None. HINT: remove the return statement in `training_epoch_end`.

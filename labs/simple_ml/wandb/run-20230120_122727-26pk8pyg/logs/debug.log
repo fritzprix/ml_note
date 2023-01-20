@@ -1,0 +1,33 @@
+2023-01-20 12:27:27,307 INFO    MainThread:12510 [wandb_setup.py:_flush():68] Configure stats pid to 12510
+2023-01-20 12:27:27,307 INFO    MainThread:12510 [wandb_setup.py:_flush():68] Loading settings from /home/fritzprix/.config/wandb/settings
+2023-01-20 12:27:27,307 INFO    MainThread:12510 [wandb_setup.py:_flush():68] Loading settings from /home/fritzprix/my_work/ml_note/labs/simple_ml/wandb/settings
+2023-01-20 12:27:27,307 INFO    MainThread:12510 [wandb_setup.py:_flush():68] Loading settings from environment variables: {'_require_service': 'True'}
+2023-01-20 12:27:27,307 INFO    MainThread:12510 [wandb_setup.py:_flush():68] Inferring run settings from compute environment: {'program_relpath': 'labs/simple_ml/train.py', 'program': '/home/fritzprix/my_work/ml_note/labs/simple_ml/train.py'}
+2023-01-20 12:27:27,307 INFO    MainThread:12510 [wandb_init.py:_log_setup():476] Logging user logs to /home/fritzprix/my_work/ml_note/labs/simple_ml/wandb/run-20230120_122727-26pk8pyg/logs/debug.log
+2023-01-20 12:27:27,307 INFO    MainThread:12510 [wandb_init.py:_log_setup():477] Logging internal logs to /home/fritzprix/my_work/ml_note/labs/simple_ml/wandb/run-20230120_122727-26pk8pyg/logs/debug-internal.log
+2023-01-20 12:27:27,307 INFO    MainThread:12510 [wandb_init.py:init():516] calling init triggers
+2023-01-20 12:27:27,307 INFO    MainThread:12510 [wandb_init.py:init():519] wandb.init called with sweep_config: {}
+config: {}
+2023-01-20 12:27:27,307 INFO    MainThread:12510 [wandb_init.py:init():569] starting backend
+2023-01-20 12:27:27,307 INFO    MainThread:12510 [wandb_init.py:init():573] setting up manager
+2023-01-20 12:27:27,308 INFO    MainThread:12510 [backend.py:_multiprocessing_setup():102] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-01-20 12:27:27,309 INFO    MainThread:12510 [wandb_init.py:init():580] backend started and connected
+2023-01-20 12:27:27,311 INFO    MainThread:12510 [wandb_init.py:init():658] updated telemetry
+2023-01-20 12:27:27,312 INFO    MainThread:12510 [wandb_init.py:init():693] communicating run to backend with 60 second timeout
+2023-01-20 12:27:27,749 INFO    MainThread:12510 [wandb_run.py:_on_init():2006] communicating current version
+2023-01-20 12:27:27,777 INFO    MainThread:12510 [wandb_run.py:_on_init():2010] got version response upgrade_message: "wandb version 0.13.9 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2023-01-20 12:27:27,778 INFO    MainThread:12510 [wandb_init.py:init():728] starting run threads in backend
+2023-01-20 12:27:30,334 INFO    MainThread:12510 [wandb_run.py:_console_start():1986] atexit reg
+2023-01-20 12:27:30,335 INFO    MainThread:12510 [wandb_run.py:_redirect():1844] redirect: SettingsConsole.WRAP_RAW
+2023-01-20 12:27:30,335 INFO    MainThread:12510 [wandb_run.py:_redirect():1909] Wrapping output streams.
+2023-01-20 12:27:30,335 INFO    MainThread:12510 [wandb_run.py:_redirect():1931] Redirects installed.
+2023-01-20 12:27:30,335 INFO    MainThread:12510 [wandb_init.py:init():765] run started, returning control to user process
+2023-01-20 12:27:38,433 INFO    MainThread:12510 [wandb_run.py:_config_callback():1163] config_cb None None {'lr': 0.0001, 'num_hidden': 10, 'num_layers': 2, 'use_sliding': True, 'padding_str': '<pad>'}
+2023-01-20 12:41:31,193 INFO    MainThread:12510 [wandb_run.py:_finish():1753] finishing run dwidlee/simple_glm_character/26pk8pyg
+2023-01-20 12:41:31,194 INFO    MainThread:12510 [wandb_run.py:_atexit_cleanup():1955] got exitcode: 0
+2023-01-20 12:41:31,194 INFO    MainThread:12510 [wandb_run.py:_restore():1938] restore
+2023-01-20 12:41:31,194 INFO    MainThread:12510 [wandb_run.py:_restore():1944] restore done
+2023-01-20 12:41:37,256 INFO    MainThread:12510 [wandb_run.py:_footer_history_summary_info():3408] rendering history
+2023-01-20 12:41:37,256 INFO    MainThread:12510 [wandb_run.py:_footer_history_summary_info():3440] rendering summary
+2023-01-20 12:41:37,258 INFO    MainThread:12510 [wandb_run.py:_footer_sync_info():3364] logging synced files

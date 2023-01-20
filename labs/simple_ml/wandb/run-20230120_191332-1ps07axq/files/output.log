@@ -1,0 +1,167 @@
+Found cached dataset wikitext (/home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126)
+100%|████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00, 1421.96it/s]
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-fa4a4a4c04b58af6.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-73a6c9a57c86a67d.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-18725908dcba4345.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-0815980a29664724.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-112469153db666a2.arrow
+Found cached dataset wikitext (/home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126)
+100%|████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00, 2486.74it/s]
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-29738f630967d57d.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-b79c4c83bb14680a.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-cd96fcca50ef7df6.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-f947132d80c6dcbb.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-1a59824c10f98229.arrow
+GPU available: True (cuda), used: False
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/setup.py:175: PossibleUserWarning: GPU available but not used. Set `accelerator` and `devices` using `Trainer(accelerator='gpu', devices=1)`.
+  rank_zero_warn(
+  | Name      | Type      | Params
+----------------------------------------
+0 | gru       | GRU       | 9.6 K
+1 | fc        | Linear    | 3.1 K
+2 | embedding | Embedding | 81.2 K
+3 | loss      | MSELoss   | 0
+----------------------------------------
+12.7 K    Trainable params
+81.2 K    Non-trainable params
+93.9 K    Total params
+0.376     Total estimated model params size (MB)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Epoch 0:  20%|██████████▎                                         | 131/657 [06:40<26:47,  3.06s/it, loss=0.0392, v_num=7axq]
+/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/call.py:48: UserWarning: Detected KeyboardInterrupt, attempting graceful shutdown...
+  rank_zero_warn("Detected KeyboardInterrupt, attempting graceful shutdown...")

@@ -1,0 +1,104 @@
+/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loggers/wandb.py:396: UserWarning: There is a wandb run already in progress and newly created instances of `WandbLogger` will reuse this run. If this is not desired, call `wandb.finish()` before instantiating `WandbLogger`.
+  rank_zero_warn(
+Found cached dataset wikitext (/home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00, 1572.08it/s]
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-fa4a4a4c04b58af6.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-73a6c9a57c86a67d.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-18725908dcba4345.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-0815980a29664724.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-112469153db666a2.arrow
+Found cached dataset wikitext (/home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00, 2192.91it/s]
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-29738f630967d57d.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-b79c4c83bb14680a.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-cd96fcca50ef7df6.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-f947132d80c6dcbb.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-1a59824c10f98229.arrow
+GPU available: True (cuda), used: False
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/setup.py:175: PossibleUserWarning: GPU available but not used. Set `accelerator` and `devices` using `Trainer(accelerator='gpu', devices=1)`.
+  rank_zero_warn(
+  | Name      | Type             | Params
+-----------------------------------------------
+0 | gru       | GRU              | 9.6 K
+1 | fc        | Linear           | 3.1 K
+2 | embedding | Embedding        | 81.2 K
+3 | loss      | CrossEntropyLoss | 0
+-----------------------------------------------
+93.9 K    Trainable params
+0         Non-trainable params
+93.9 K    Total params
+0.376     Total estimated model params size (MB)
+Traceback (most recent call last):
+  File "/home/fritzprix/my_work/ml_note/labs/simple_ml/train.py", line 51, in <module>
+    main(arg_parser.parse_args())
+  File "/home/fritzprix/my_work/ml_note/labs/simple_ml/train.py", line 37, in main
+    trainer.fit(model, train_dataloaders=train_dataloader, val_dataloaders=val_dataloader)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 603, in fit
+    call._call_and_handle_interrupt(
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/call.py", line 38, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 645, in _fit_impl
+    self._run(model, ckpt_path=self.ckpt_path)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 1098, in _run
+    results = self._run_stage()
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 1177, in _run_stage
+    self._run_train()
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 1200, in _run_train
+    self.fit_loop.run()
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+    self.advance(*args, **kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/fit_loop.py", line 267, in advance
+    self._outputs = self.epoch_loop.run(self._data_fetcher)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+    self.advance(*args, **kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/epoch/training_epoch_loop.py", line 214, in advance
+    batch_output = self.batch_loop.run(kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+    self.advance(*args, **kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/batch/training_batch_loop.py", line 88, in advance
+    outputs = self.optimizer_loop.run(optimizers, kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+    self.advance(*args, **kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 200, in advance
+    result = self._run_optimization(kwargs, self._optimizers[self.optim_progress.optimizer_position])
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 247, in _run_optimization
+    self._optimizer_step(optimizer, opt_idx, kwargs.get("batch_idx", 0), closure)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 357, in _optimizer_step
+    self.trainer._call_lightning_module_hook(
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 1342, in _call_lightning_module_hook
+    output = fn(*args, **kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/core/module.py", line 1661, in optimizer_step
+    optimizer.step(closure=optimizer_closure)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/core/optimizer.py", line 169, in step
+    step_output = self._strategy.optimizer_step(self._optimizer, self._optimizer_idx, closure, **kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/strategies/strategy.py", line 234, in optimizer_step
+    return self.precision_plugin.optimizer_step(
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 121, in optimizer_step
+    return optimizer.step(closure=closure, **kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/torch/optim/optimizer.py", line 140, in wrapper
+    out = func(*args, **kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/torch/optim/optimizer.py", line 23, in _use_grad
+    ret = func(self, *args, **kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/torch/optim/adam.py", line 183, in step
+    loss = closure()
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 107, in _wrap_closure
+    closure_result = closure()
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 147, in __call__
+    self._result = self.closure(*args, **kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 133, in closure
+    step_output = self._step_fn()
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 406, in _training_step
+    training_step_output = self.trainer._call_strategy_hook("training_step", *kwargs.values())
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 1480, in _call_strategy_hook
+    output = fn(*args, **kwargs)
+  File "/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/strategies/strategy.py", line 378, in training_step
+    return self.model.training_step(*args, **kwargs)
+  File "/home/fritzprix/my_work/ml_note/labs/simple_ml/model/__init__.py", line 37, in training_step
+    print(f"{X[:,-1,:]} vs {y[:,-1,:]}")
+IndexError: too many indices for tensor of dimension 2
+Sanity Checking DataLoader 0:   0%|                                                                                    | 0/2 [00:00<?, ?it/s]torch.Size([40, 40])
+Sanity Checking DataLoader 0:  50%|██████████████████████████████████████                                      | 1/2 [00:00<00:00, 63.81it/s]torch.Size([40, 40])
+Epoch 0:   0%|                                                                                                       | 0/657 [00:00<?, ?it/s]train 0

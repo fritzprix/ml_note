@@ -1,0 +1,40 @@
+/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/loggers/wandb.py:396: UserWarning: There is a wandb run already in progress and newly created instances of `WandbLogger` will reuse this run. If this is not desired, call `wandb.finish()` before instantiating `WandbLogger`.
+  rank_zero_warn(
+Found cached dataset wikitext (/home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126)
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00, 195.44it/s]
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-fa4a4a4c04b58af6.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-73a6c9a57c86a67d.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-18725908dcba4345.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-0815980a29664724.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-112469153db666a2.arrow
+Sanity Checking DataLoader 0:   0%|                                                                                    | 0/2 [00:00<?, ?it/s]torch.Size([100, 40])
+Sanity Checking DataLoader 0:  50%|██████████████████████████████████████                                      | 1/2 [00:00<00:00, 18.93it/s]torch.Size([100, 40])
+Epoch 0:   0%|                                                                                                        | 0/49 [00:00<?, ?it/s]
+Found cached dataset wikitext (/home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00, 2405.45it/s]
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-29738f630967d57d.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-b79c4c83bb14680a.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-cd96fcca50ef7df6.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-f947132d80c6dcbb.arrow
+Loading cached processed dataset at /home/fritzprix/.cache/huggingface/datasets/wikitext/wikitext-2-v1/1.0.0/a241db52902eaf2c6aa732210bead40c090019a499ceb13bcbfa3f8ab646a126/cache-1a59824c10f98229.arrow
+GPU available: True (cuda), used: False
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/setup.py:175: PossibleUserWarning: GPU available but not used. Set `accelerator` and `devices` using `Trainer(accelerator='gpu', devices=1)`.
+  rank_zero_warn(
+  | Name      | Type             | Params
+-----------------------------------------------
+0 | gru       | GRU              | 9.6 K
+1 | fc        | Linear           | 3.1 K
+2 | embedding | Embedding        | 81.2 K
+3 | loss      | CrossEntropyLoss | 0
+-----------------------------------------------
+93.9 K    Trainable params
+0         Non-trainable params
+93.9 K    Total params
+0.376     Total estimated model params size (MB)
+/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py:1595: PossibleUserWarning: The number of training batches (24) is smaller than the logging interval Trainer(log_every_n_steps=50). Set a lower value for log_every_n_steps if you want to see logs for the training epoch.
+  rank_zero_warn(
+/home/fritzprix/miniconda3/envs/directml/lib/python3.10/site-packages/pytorch_lightning/trainer/call.py:48: UserWarning: Detected KeyboardInterrupt, attempting graceful shutdown...
+  rank_zero_warn("Detected KeyboardInterrupt, attempting graceful shutdown...")
