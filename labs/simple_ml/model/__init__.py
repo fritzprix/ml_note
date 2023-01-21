@@ -30,7 +30,7 @@ class GRUML(pl.LightningModule):
         return self.fc(out)
     
     def training_step(self, batch, batch_idx) -> torch.Tensor:
-        seq = batch
+        seq = batch['seqs']
         losses = []
         for subsq_len in range(2, seq.shape[1] - 1, 1):
             X = seq[:, 0: subsq_len]
@@ -48,7 +48,7 @@ class GRUML(pl.LightningModule):
         
     
     def validation_step(self, batch, _):
-        seq = batch
+        seq = batch['seqs']
         X, y = seq[:, 0: -2], seq[:, 1:-1]
         y_hat = self(X)
         assert isinstance(y_hat, torch.Tensor)
@@ -93,9 +93,17 @@ class WikiDataset(data.Dataset):
         return len(self.data)
     
     def collater(self):
-        return lambda batch: TF.pad_sequence([e['token_id'] for e in batch], batch_first=True, padding_value=self.vocab['<pad>'])
+        return BatchPaddingCollater(self.vocab['<pad>'])
         
+
+class BatchPaddingCollater:
+    def __init__(self, padding_val) -> None:
+        self.padding_val = padding_val
         
+    def __call__(self, batch):
+        seqs = TF.pad_sequence([e['token_id'] for e in batch], batch_first=True, padding_value= self.padding_val)
+        lengs = torch.Tensor([e['length'] for e in batch])
+        return {'seqs': seqs, 'lens':lengs}
         
         
         
