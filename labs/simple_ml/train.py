@@ -13,13 +13,21 @@ import os
 def main(args: Namespace):
     
     wandb_logger = loggers.WandbLogger(project='simple_glm_character')
-    train_dataset = WikiDataset(n_steps=64, target='train')
-    val_dataset = WikiDataset(n_steps=64, target='validation')
+    train_dataset = WikiDataset(n_steps=args.n_steps, target='train')
+    val_dataset = WikiDataset(n_steps=args.n_steps, target='validation')
     collate_fn = train_dataset.collater()
-    train_dataloader = data.DataLoader(dataset=train_dataset, batch_size=args.batch, num_workers=os.cpu_count(), collate_fn=collate_fn)
-    val_dataloader = data.DataLoader(dataset=val_dataset, batch_size=args.batch, num_workers=os.cpu_count(), collate_fn=collate_fn)
+    train_dataloader = data.DataLoader(dataset=train_dataset, batch_size=args.batch, 
+                                       num_workers=os.cpu_count(), 
+                                       collate_fn=collate_fn, 
+                                       sampler=data.BatchSampler(data.SequentialSampler(train_dataset), args.n_steps, drop_last=True))
+    
+    val_dataloader = data.DataLoader(dataset=val_dataset, batch_size=args.batch, 
+                                     num_workers=os.cpu_count(), 
+                                     collate_fn=collate_fn,
+                                     sampler=data.BatchSampler(data.SequentialSampler(val_dataset), args.n_steps, drop_last=True))
+    
     input_size = len(train_dataset.vocab)
-    model = GRUML(input_size=input_size, lr=args.lr, num_hidden=input_size, padding_id=train_dataset.vocab['<pad>'])
+    model = GRUML(input_size=input_size, lr=args.lr, num_hidden=input_size * 2, padding_id=train_dataset.vocab['<pad>'])
     
     ckpt_callback = callbacks.ModelCheckpoint('./model/gru_ml/', 
                                               filename='model-{epoch}-{val_loss:.3f}', 
@@ -40,6 +48,7 @@ def main(args: Namespace):
 
 if __name__ == '__main__':
     arg_parser = ArgumentParser('train.py')
+    arg_parser.add_argument('--n_steps', type=int, default=60)
     arg_parser.add_argument('--batch', type=int, default=40)
     arg_parser.add_argument('--lr', type=float, default=1e-5)
     arg_parser.add_argument('--max_epoch', type=int, default=100)
