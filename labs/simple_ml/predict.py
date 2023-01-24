@@ -13,7 +13,7 @@ def main(args):
         print(X)
         X = model(X).argmax(dim=1)
         seq.append(X[-1].item())
-    answer = str([vocab.lookup_token(id) for id in seq])
+    answer = ''.join([vocab.lookup_token(id) for id in seq])
     print(answer)
         
     

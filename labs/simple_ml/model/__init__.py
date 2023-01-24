@@ -7,6 +7,7 @@ from torchtext import vocab, functional as TF
 from torchtext import transforms
 import torchtext
 import datasets
+import re
 
 
 class GRUML(pl.LightningModule):
@@ -30,7 +31,7 @@ class GRUML(pl.LightningModule):
         return self.fc(out)
     
     def training_step(self, batch, batch_idx) -> torch.Tensor:
-        seq = batch['seqs']
+        seq = batch
         losses = []
         for subsq_len in range(2, seq.shape[1] - 1, 1):
             X = seq[:, 0: subsq_len]
@@ -48,7 +49,7 @@ class GRUML(pl.LightningModule):
         
     
     def validation_step(self, batch, _):
-        seq = batch['seqs']
+        seq = batch
         X, y = seq[:, 0: -2], seq[:, 1:-1]
         y_hat = self(X)
         assert isinstance(y_hat, torch.Tensor)
@@ -73,18 +74,19 @@ class WikiDataset(data.Dataset):
         assert target in {"train", "test", "validation"}
         data = datasets.load_dataset('wikitext', 'wikitext-2-v1')[target]
         chars = set()
+        lines = []
         for line in data['text']:
+            line = re.sub('[^a-zA-Z1-9.,]+',' ',line).lower()
+            line = re.sub('[\s]+', ' ', line)
+            lines.append(line)
             chars = chars.union(set(line))
         
-        self.vocab = vocab.build_vocab_from_iterator(chars, specials=['<pad>', '<unk>'])
         
-        self.data = data.filter(lambda x: len(x) > 0, input_columns='text') \
-                .map(lambda x: {'text': x.strip()}, input_columns='text') \
-                .map(lambda x: {"token_id": [self.vocab[c] for c in x]}, input_columns='text') \
-                .map(lambda x: {"token_id": TF.truncate(x, n_steps)}, input_columns='token_id') \
-                .map(lambda x: {"length": len(x)}, input_columns='token_id')
+        data = ' '.join(lines)
+        self.vocab = vocab.build_vocab_from_iterator(chars, specials=['<pad>', '<unk>'])
+        self.data = [self.vocab[c] for c in data]
+        self.data = torch.Tensor(self.data).long()
                 
-        self.data.set_format('torch', columns=['text', 'length', 'token_id'])
     
     def __getitem__(self, index):
         return self.data[index]
@@ -101,9 +103,7 @@ class BatchPaddingCollater:
         self.padding_val = padding_val
         
     def __call__(self, batch):
-        seqs = TF.pad_sequence([e['token_id'] for e in batch], batch_first=True, padding_value= self.padding_val)
-        lengs = torch.Tensor([e['length'] for e in batch])
-        return {'seqs': seqs, 'lens':lengs}
+        return TF.pad_sequence(batch, batch_first=True, padding_value= self.padding_val)
         
         
         
