@@ -3,37 +3,38 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 from torch.utils import data
-from torchtext import vocab, functional as TF
-from torchtext import transforms
-import torchtext
+from torchtext import vocab
 import datasets
+from d2l import torch as d2l
 import re
+
+MIN_NGRAM = 2
 
 
 class GRUML(pl.LightningModule):
-    def __init__(self, input_size, lr:float = 1e-4,  num_hidden=40, num_layers=3, use_sliding=True, padding_id=0):
+    def __init__(self, input_size, lr:float = 1e-4,  num_hidden=40, num_layers=10, use_sliding=False, padding_id=0):
         super().__init__()
         self.save_hyperparameters()
         self.input_size = input_size
         self.padding_id = padding_id
-        self.lr = lr
-        self.gru = nn.GRU(input_size=input_size, 
-                          hidden_size=num_hidden, num_layers=num_layers, batch_first=True)
         
+        self.lr = lr
+        self.gru = nn.GRU(input_size=input_size, hidden_size=num_hidden, num_layers=num_layers, batch_first=True)
         self.fc = nn.Linear(num_hidden, input_size)
-        self.loss = torch.nn.CrossEntropyLoss(ignore_index=self.padding_id)
+        self.loss = torch.nn.CrossEntropyLoss()
         self.use_sliding = use_sliding
         
         
-    def forward(self,X):
+    def forward(self, X):
         emb = F.one_hot(X, self.input_size).float()
         out, _ = self.gru(emb)
         return self.fc(out)
     
-    def training_step(self, batch, batch_idx) -> torch.Tensor:
+    def training_step(self, batch, _) -> torch.Tensor:
         seq = batch
         losses = []
-        for subsq_len in range(2, seq.shape[1] - 1, 1):
+        sliding = range(MIN_NGRAM, seq.shape[1] - 1, 2) if self.use_sliding else range(seq.shape[1] - 1, seq.shape[1])
+        for subsq_len in sliding:
             X = seq[:, 0: subsq_len]
             y = seq[:, 1: subsq_len + 1]
             y_hat = self(X)
@@ -47,10 +48,9 @@ class GRUML(pl.LightningModule):
         avg = torch.stack([o['loss'] for o in outputs]).mean()
         self.log("train_loss", avg)
         
-    
     def validation_step(self, batch, _):
         seq = batch
-        X, y = seq[:, 0: -2], seq[:, 1:-1]
+        X, y = seq[:, 0: -1], seq[:, 1:]
         y_hat = self(X)
         assert isinstance(y_hat, torch.Tensor)
         assert isinstance(y, torch.Tensor)
@@ -64,6 +64,23 @@ class GRUML(pl.LightningModule):
     def configure_optimizers(self) -> torch.optim.Optimizer:
         return torch.optim.Adam(self.parameters(), self.lr)
         
+class TimeMachine(data.Dataset):
+    def __init__(self, n_steps:int, max_tokens:int=10000):
+        super().__init__()
+        self.n_steps = n_steps
+        data, voc = d2l.load_data_time_machine(1, num_steps=n_steps)
+        corpus = data.corpus
+        self.vocab = vocab.vocab(voc.token_to_idx, specials=['<unk>'])
+        self.vocab.set_default_index(self.vocab['<unk>'])
+        self.data = torch.Tensor([corpus[i:i + n_steps] for i in range(len(corpus) - n_steps)]).long()
+        
+    
+    def __getitem__(self, index) -> torch.Tensor:
+        return self.data[index]
+    
+    def __len__(self) -> int:
+        return len(self.data)
+    
 
     
 class WikiDataset(data.Dataset):
@@ -77,16 +94,17 @@ class WikiDataset(data.Dataset):
         lines = []
         for line in data['text']:
             line = re.sub('[^a-zA-Z1-9.,]+',' ',line).lower()
-            line = re.sub('[\s]+', ' ', line)
+            line = re.sub('[\s]+', ' ', line).strip()
             lines.append(line)
             chars = chars.union(set(line))
         
         
-        data = ' '.join(lines)
         self.vocab = vocab.build_vocab_from_iterator(chars, specials=['<pad>', '<unk>'])
-        self.data = [self.vocab[c] for c in data]
-        self.data = torch.Tensor(self.data).long()
-                
+        self.vocab.set_default_index(self.vocab['<unk>'])
+        
+        data = ' '.join(lines)
+        data = [list(data[i:i + n_steps]) for i in range(len(data) - n_steps)]
+        self.data = torch.Tensor([self.vocab.lookup_indices(seq) for seq in data]).long()
     
     def __getitem__(self, index):
         return self.data[index]
@@ -94,16 +112,5 @@ class WikiDataset(data.Dataset):
     def __len__(self):
         return len(self.data)
     
-    def collater(self):
-        return BatchPaddingCollater(self.vocab['<pad>'])
-        
-
-class BatchPaddingCollater:
-    def __init__(self, padding_val) -> None:
-        self.padding_val = padding_val
-        
-    def __call__(self, batch):
-        return TF.pad_sequence(batch, batch_first=True, padding_value= self.padding_val)
-        
         
         
