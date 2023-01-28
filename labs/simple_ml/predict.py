@@ -1,19 +1,21 @@
 import torch
 from model import GRUML, WikiDataset
 from argparse import Namespace, ArgumentParser
-
+from inspect import getmembers
 
 def main(args):
-    dataset = WikiDataset(n_steps=40)
+    dataset = WikiDataset(n_steps=10)
     vocab = dataset.vocab
     model = GRUML.load_from_checkpoint('./model/gru_ml/model.ckpt')
     seq = [dataset.vocab[c] for c in args.prompt]
     X = torch.Tensor(seq).long()
     for _ in range(args.len):
-        print(X)
         X = model(X).argmax(dim=1)
         seq.append(X[-1].item())
-    answer = ''.join([vocab.lookup_token(id) for id in seq])
+    
+    # answer = ''.join([vocab.lookup_token(id) for id in seq])
+    print(getmembers(vocab))
+    answer = ''.join([vocab.idx_to_token[id] for id in seq])
     print(answer)
         
     
