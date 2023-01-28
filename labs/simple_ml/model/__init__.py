@@ -84,7 +84,7 @@ class GRUML(pl.LightningModule):
     def training_step(self, batch, _) -> torch.Tensor:
         seq = batch
         losses = []
-        sliding = range(MIN_NGRAM, seq.shape[1] - 1, 2) if self.use_sliding else range(seq.shape[1] - 1, seq.shape[1])
+        sliding = range(MIN_NGRAM, seq.shape[1], 2) if self.use_sliding else [seq.shape[1] - 1]
         for subsq_len in sliding:
             X = seq[:, 0: subsq_len]
             y = seq[:, 1: subsq_len + 1]
