@@ -10,17 +10,9 @@ def main(args):
         dataset = WikiDataset(n_steps=10)
     vocab = dataset.vocab
     model = GRUML.load_from_checkpoint(f'./model/gru_ml/{args.data}/model.ckpt')
-    seq = [dataset.vocab[c] for c in args.prompt]
-    X = torch.Tensor(seq).long()
-    for _ in range(args.len):
-        X = model(X).argmax(dim=1)
-        seq.append(X[-1].item())
-    
-    answer = ''.join([vocab.lookup_token(id) for id in seq])
-    print(answer)
+    pred = model.predict(args.prompt, args.len, vocab)
+    print(''.join(pred))
         
-    
-    
     
 
 if __name__ == '__main__':

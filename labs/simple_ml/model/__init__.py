@@ -76,10 +76,22 @@ class GRUML(pl.LightningModule):
         self.loss = torch.nn.CrossEntropyLoss(ignore_index=padding_id)
         self.use_sliding = use_sliding
         
-    def forward(self, X):
+    def forward(self, X, hidden=None):
         emb = F.one_hot(X, self.input_size).float()
-        out, _ = self.gru(emb)
-        return self.fc(out)
+        out, hidden = self.gru(emb, hidden)
+        return self.fc(out), hidden
+    
+    def predict(self, prefix, pred_count, vocab: vocab.Vocab, warm_up=True, device=None):
+        prefix_tokens = torch.Tensor(vocab.lookup_indices(list(prefix))).long()
+        X, state = prefix_tokens[0].unsqueeze(0) if warm_up else prefix_tokens, None
+        for i in range(len(X), pred_count):
+            y, state = self(X, state)
+            if i < len(prefix_tokens):
+                X = torch.cat([X, prefix_tokens[i].unsqueeze(0)], dim=0)
+            else:
+                X = torch.cat([X, y[-1].argmax().unsqueeze(0)], dim=0).long()
+        return vocab.lookup_tokens(X.tolist())
+                
     
     def training_step(self, batch, _) -> torch.Tensor:
         seq = batch
@@ -88,7 +100,7 @@ class GRUML(pl.LightningModule):
         for subsq_len in sliding:
             X = seq[:, 0: subsq_len]
             y = seq[:, 1: subsq_len + 1]
-            y_hat = self(X)
+            y_hat, _ = self(X)
             assert isinstance(y_hat, torch.Tensor)
             assert isinstance(y, torch.Tensor)
             loss = self.loss(y_hat.reshape(-1, y_hat.shape[-1]), y.reshape(-1))
@@ -104,7 +116,7 @@ class GRUML(pl.LightningModule):
     def validation_step(self, batch, _):
         seq = batch
         X, y = seq[:, 0: -1], seq[:, 1:]
-        y_hat = self(X)
+        y_hat,_ = self(X)
         assert isinstance(y_hat, torch.Tensor)
         assert isinstance(y, torch.Tensor)
         loss = self.loss(y_hat.reshape(-1, y_hat.shape[-1]), y.reshape(-1))
