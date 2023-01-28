@@ -35,7 +35,7 @@ def main(args: Namespace):
     
     input_size = len(vocab)
     padding_id = vocab['<pad>']
-    model = GRUML(input_size=input_size, lr=args.lr, num_hidden=32, num_layers=1, padding_id=padding_id)
+    model = GRUML(input_size=input_size, lr=args.lr, num_hidden=128, num_layers=1, padding_id=padding_id)
     
     ckpt_callback = callbacks.ModelCheckpoint(f'./model/gru_ml/{args.data}',
                                               filename='model-{epoch}-{val_loss:.3f}', 
@@ -43,7 +43,7 @@ def main(args: Namespace):
                                               monitor='val_loss', 
                                               mode='min')
     
-    early_callback = callbacks.EarlyStopping(monitor='val_loss', mode='min', patience=300)
+    early_callback = callbacks.EarlyStopping(monitor='val_loss', mode='min', patience=10)
     
     trainer = pl.Trainer(logger=logger, 
                          max_epochs=args.max_epoch, 
