@@ -1,4 +1,4 @@
-from model import GRUML, WikiDataset, TimeMachine
+from model import GRUML, WikiDataset, TimeMachine, RNNML
 from argparse import ArgumentParser, Namespace
 from torch.utils import data
 import torch
@@ -13,7 +13,10 @@ from d2l import torch as d2l
 
 def main(args: Namespace):
     d2l.read_time_machine()
-    wandb_logger = loggers.WandbLogger(project='simple_glm_character')
+    if args.log == 'tf':
+        logger = loggers.TensorBoardLogger('tf_logs')
+    else:
+        logger = loggers.WandbLogger(project='simple_glm_character')
     if args.data == 'timemachine':
         tm_dataset = TimeMachine(n_steps=args.n_steps)
         train_dataset, val_dataset = data.random_split(tm_dataset, [0.9, 0.1])
@@ -32,7 +35,7 @@ def main(args: Namespace):
     
     input_size = len(vocab)
     padding_id = vocab['<pad>']
-    model = GRUML(input_size=input_size, lr=args.lr, num_hidden=input_size * 16, num_layers=4, padding_id=padding_id)
+    model = GRUML(input_size=input_size, lr=args.lr, num_hidden=32, num_layers=1, padding_id=padding_id)
     
     ckpt_callback = callbacks.ModelCheckpoint(f'./model/gru_ml/{args.data}',
                                               filename='model-{epoch}-{val_loss:.3f}', 
@@ -42,7 +45,12 @@ def main(args: Namespace):
     
     early_callback = callbacks.EarlyStopping(monitor='val_loss', mode='min', patience=300)
     
-    trainer = pl.Trainer(logger=wandb_logger, max_epochs=args.max_epoch, callbacks=[ckpt_callback, early_callback], accelerator='gpu', check_val_every_n_epoch=2)
+    trainer = pl.Trainer(logger=logger, 
+                         max_epochs=args.max_epoch, 
+                         callbacks=[ckpt_callback, early_callback], 
+                         gradient_clip_val=1,
+                         accelerator='gpu', 
+                         check_val_every_n_epoch=2)
     trainer.fit(model, train_dataloaders=train_dataloader, val_dataloaders=val_dataloader)
     
     
@@ -55,4 +63,5 @@ if __name__ == '__main__':
     arg_parser.add_argument('--batch', type=int, default=40)
     arg_parser.add_argument('--lr', type=float, default=1e-4)
     arg_parser.add_argument('--max_epoch', type=int, default=100)
+    arg_parser.add_argument('--log', choices=['tf', 'wandb'], default='tf')
     main(arg_parser.parse_args())
