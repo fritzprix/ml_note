@@ -1,46 +1,58 @@
-from model import GRUML, WikiDataset
+from model import GRUML, WikiDataset, TimeMachine
 from argparse import ArgumentParser, Namespace
 from torch.utils import data
+import torch
 import pytorch_lightning as pl
 from pytorch_lightning import loggers
 from pytorch_lightning import callbacks
-import wandb
 import os
-
+from torchtext.vocab import Vocab
+from d2l import torch as d2l
 
 
 
 def main(args: Namespace):
-    
+    d2l.read_time_machine()
     wandb_logger = loggers.WandbLogger(project='simple_glm_character')
-    train_dataset = WikiDataset(n_steps=64, target='train')
-    val_dataset = WikiDataset(n_steps=64, target='validation')
-    collate_fn = train_dataset.collater()
-    train_dataloader = data.DataLoader(dataset=train_dataset, batch_size=args.batch, num_workers=os.cpu_count(), collate_fn=collate_fn)
-    val_dataloader = data.DataLoader(dataset=val_dataset, batch_size=args.batch, num_workers=os.cpu_count(), collate_fn=collate_fn)
-    input_size = len(train_dataset.vocab)
-    model = GRUML(input_size=input_size, lr=args.lr, num_hidden=input_size, padding_id=train_dataset.vocab['<pad>'])
+    if args.data == 'timemachine':
+        tm_dataset = TimeMachine(n_steps=args.n_steps)
+        train_dataset, val_dataset = data.random_split(tm_dataset, [0.9, 0.1])
+        vocab = tm_dataset.vocab
+    else:
+        train_dataset = WikiDataset(n_steps=args.n_steps, target='train')
+        val_dataset = WikiDataset(n_steps=args.n_steps, target='validation')
+        vocab = train_dataset.vocab
+    assert isinstance(vocab, Vocab)
+    print([vocab.lookup_token(i) for i in range(len(vocab))])
+    train_dataloader = data.DataLoader(dataset=train_dataset, batch_size=args.batch, 
+                                       num_workers=os.cpu_count(), shuffle=True)
     
-    ckpt_callback = callbacks.ModelCheckpoint('./model/gru_ml/', 
+    val_dataloader = data.DataLoader(dataset=val_dataset, batch_size=args.batch, 
+                                     num_workers=os.cpu_count())
+    
+    input_size = len(vocab)
+    padding_id = vocab['<pad>']
+    model = GRUML(input_size=input_size, lr=args.lr, num_hidden=input_size * 16, num_layers=4, padding_id=padding_id)
+    
+    ckpt_callback = callbacks.ModelCheckpoint(f'./model/gru_ml/{args.data}',
                                               filename='model-{epoch}-{val_loss:.3f}', 
                                               save_top_k=3, 
                                               monitor='val_loss', 
                                               mode='min')
     
-    early_callback = callbacks.EarlyStopping(monitor='val_loss', mode='min', patience=3)
+    early_callback = callbacks.EarlyStopping(monitor='val_loss', mode='min', patience=300)
     
-    trainer = pl.Trainer(logger=wandb_logger, max_epochs=args.max_epoch, callbacks=[ckpt_callback, early_callback], accelerator='gpu')
+    trainer = pl.Trainer(logger=wandb_logger, max_epochs=args.max_epoch, callbacks=[ckpt_callback, early_callback], accelerator='gpu', check_val_every_n_epoch=2)
     trainer.fit(model, train_dataloaders=train_dataloader, val_dataloaders=val_dataloader)
     
     
     
-    
-    
-
 
 if __name__ == '__main__':
     arg_parser = ArgumentParser('train.py')
+    arg_parser.add_argument('--data', choices=['timemachine', 'wiki'], default='wiki'),
+    arg_parser.add_argument('--n_steps', type=int, default=10)
     arg_parser.add_argument('--batch', type=int, default=40)
-    arg_parser.add_argument('--lr', type=float, default=1e-5)
+    arg_parser.add_argument('--lr', type=float, default=1e-4)
     arg_parser.add_argument('--max_epoch', type=int, default=100)
     main(arg_parser.parse_args())
