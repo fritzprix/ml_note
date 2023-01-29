@@ -7,8 +7,10 @@ def main(args):
     assert isinstance(args.prompt, str)
     vocab = torch.load(f'./model/gru_ml/{args.data}/vocab.pt')
     model = GRUML.load_from_checkpoint(f'./model/gru_ml/{args.data}/model.ckpt')
+    
     model.cuda()
     model.freeze()
+    
     pred = model.predict(args.prompt.lower(), args.len, vocab)
     print(''.join(pred))
         
