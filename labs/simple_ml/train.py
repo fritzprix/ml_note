@@ -26,6 +26,7 @@ def main(args: Namespace):
         val_dataset = WikiDataset(n_steps=args.n_steps, target='validation')
         vocab = train_dataset.vocab
     assert isinstance(vocab, Vocab)
+    
     print([vocab.lookup_token(i) for i in range(len(vocab))])
     train_dataloader = data.DataLoader(dataset=train_dataset, batch_size=args.batch, 
                                        num_workers=os.cpu_count(), shuffle=True)
@@ -51,7 +52,9 @@ def main(args: Namespace):
                          gradient_clip_val=1,
                          accelerator='gpu', 
                          check_val_every_n_epoch=2)
+    
     trainer.fit(model, train_dataloaders=train_dataloader, val_dataloaders=val_dataloader)
+    torch.save(vocab, f'./model/gru_ml/{args.data}/vocab.pt')
     
     
     

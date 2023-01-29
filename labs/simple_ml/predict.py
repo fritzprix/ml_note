@@ -4,14 +4,12 @@ from argparse import Namespace, ArgumentParser
 from inspect import getmembers
 
 def main(args):
-    if args.data == 'timemachine':
-        dataset = TimeMachine(n_steps=10)
-    else:
-        dataset = WikiDataset(n_steps=10)
-    vocab = dataset.vocab
+    assert isinstance(args.prompt, str)
+    vocab = torch.load(f'./model/gru_ml/{args.data}/vocab.pt')
     model = GRUML.load_from_checkpoint(f'./model/gru_ml/{args.data}/model.ckpt')
+    model.cuda()
     model.freeze()
-    pred = model.predict(args.prompt, args.len, vocab)
+    pred = model.predict(args.prompt.lower(), args.len, vocab)
     print(''.join(pred))
         
     
