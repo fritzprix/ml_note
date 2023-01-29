@@ -35,7 +35,7 @@ def main(args: Namespace):
     
     input_size = len(vocab)
     padding_id = vocab['<pad>']
-    model = GRUML(input_size=input_size, lr=args.lr, num_hidden=128, num_layers=1, padding_id=padding_id)
+    model = GRUML(input_size=input_size, lr=args.lr, num_hidden=input_size * 8, padding_id=padding_id)
     
     ckpt_callback = callbacks.ModelCheckpoint(f'./model/gru_ml/{args.data}',
                                               filename='model-{epoch}-{val_loss:.3f}', 

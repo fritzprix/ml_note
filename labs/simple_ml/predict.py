@@ -10,6 +10,7 @@ def main(args):
         dataset = WikiDataset(n_steps=10)
     vocab = dataset.vocab
     model = GRUML.load_from_checkpoint(f'./model/gru_ml/{args.data}/model.ckpt')
+    model.freeze()
     pred = model.predict(args.prompt, args.len, vocab)
     print(''.join(pred))
         
