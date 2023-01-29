@@ -82,7 +82,7 @@ class GRUML(pl.LightningModule):
         return self.fc(out), hidden
     
     def predict(self, prefix, pred_count, vocab: vocab.Vocab, warm_up=True, device=None):
-        prefix_tokens = torch.Tensor(vocab.lookup_indices(list(prefix))).long()
+        prefix_tokens = torch.Tensor(vocab.lookup_indices(list(prefix))).long().to(self.device)
         X, state = prefix_tokens[0].unsqueeze(0) if warm_up else prefix_tokens, None
         for i in range(len(X), pred_count):
             y, state = self(X, state)
