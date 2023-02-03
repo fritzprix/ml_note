@@ -50,6 +50,14 @@ class KorEncoder(pl.LightningModule):
         val_loss = torch.stack([o['loss'] for o in outputs]).mean()
         val_ppl = torch.exp(val_loss)
         self.log_dict({'val_loss': val_loss, 'val_ppl': val_ppl})
+        
     def configure_optimizers(self) -> torch.optim.Optimizer:
         return torch.optim.Adam(self.parameters(), self.lr)
+    
+
+class EnDecoder(pl.LightningModule):
+    
+    def __init__(self, input_size:int, embed_size, hidden_size:int, num_layers:int=2, lr:float=1e-4, padding_id=0) -> None:
+        super().__init__()
+        self.save_hyperparameters()
     
