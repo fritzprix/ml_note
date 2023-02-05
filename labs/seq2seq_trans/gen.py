@@ -1,16 +1,17 @@
 import argparse
-import transformers
 import model
+import torch
 
 LANG_CHOICE = set(["ko","en"])
 
 def main(args):
     assert args.lang in LANG_CHOICE
     tokenizer = model.get_default_tokenizer(args.lang)
-    encoder = model.KorEncoder.load_from_checkpoint(f'model/encoder/{args.lang}/model.ckpt')
-    tokens = tokenizer.encode(args.prompt, return_tensors="pt")
-    result = encoder.generate(tokens, args.len, tokenizer)
-    print(result)
+    encoder = model.GRUEncoder.load_from_checkpoint(f'model/encoder/{args.lang}/model.ckpt')
+    cuda = torch.device('cuda')
+    tokens = tokenizer.encode(args.prompt, return_tensors="pt").to(cuda)
+    encoder = encoder.cuda()
+    print(encoder.generate(tokens, args.len, tokenizer))
         
 
 if __name__ == '__main__':

@@ -4,13 +4,13 @@ import transformers
 from torch import nn, Tensor, int64
 
 
-class KorEncoder(pl.LightningModule):
+class GRUEncoder(pl.LightningModule):
     def __init__(self, input_size:int, embed_size, hidden_size:int, num_layers:int=2, lr:float=1e-4, padding_id=0) -> None:
-        super(KorEncoder, self).__init__()
+        super(GRUEncoder, self).__init__()
         self.save_hyperparameters()
         self.lr = lr
         self.padding_id = padding_id
-        self.embedding = nn.Embedding(input_size, embed_size)
+        self.embedding = nn.Embedding(input_size, embed_size, padding_idx=padding_id)
         self.enc = nn.GRU(input_size=embed_size, 
                           hidden_size=hidden_size, 
                           num_layers=num_layers)
@@ -30,7 +30,6 @@ class KorEncoder(pl.LightningModule):
     @torch.no_grad()
     def generate(self, prefix: torch.Tensor, gen_len: int, tokenize: transformers.AutoTokenizer, warmup=True):
         # prefix comes in with shape of (batch, seq) with token_id
-        print(f"prefix : {prefix}")
         prefix_sparsev = self.embedding(prefix.t().type(int64))
         # prefix_sparsev encoded from transpose of prefix, the shape => (seq, batch, emb)
         X, state = prefix_sparsev[0,:,:].unsqueeze(0) if warmup else prefix_sparsev, None
@@ -82,10 +81,10 @@ def get_default_tokenizer(lang:str):
     if lang == "ko":
         return transformers.AutoTokenizer.from_pretrained("skt/ko-gpt-trinity-1.2B-v0.5")
     else:
-        return transformers.AutoTokenizer.from_pretrained("gpt2")
+        tokenizer = transformers.AutoTokenizer.from_pretrained("gpt2")
+        added_count = tokenizer.add_special_tokens({"pad_token": "[PAD]"})
+        print(f"token added {added_count}")
+        tokenizer.pad_token_id = tokenizer.encode('[PAD]')
+        return tokenizer
 
-class EnDecoder(pl.LightningModule):
-    def __init__(self, input_size:int, embed_size, hidden_size:int, num_layers:int=2, lr:float=1e-4, padding_id=0) -> None:
-        super().__init__()
-        self.save_hyperparameters()
     
