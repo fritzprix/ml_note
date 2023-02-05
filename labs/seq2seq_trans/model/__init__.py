@@ -27,8 +27,9 @@ class GRUEncoder(pl.LightningModule):
         # state will (2 * num_layers, hidden_size)
         return outputs, state
     
+    
     @torch.no_grad()
-    def generate(self, prefix: torch.Tensor, gen_len: int, tokenize: transformers.AutoTokenizer, warmup=True):
+    def generate(self, prefix: torch.Tensor, gen_len: int, tokenizer: transformers.AutoTokenizer, warmup=True):
         # prefix comes in with shape of (batch, seq) with token_id
         prefix_sparsev = self.embedding(prefix.t().type(int64))
         # prefix_sparsev encoded from transpose of prefix, the shape => (seq, batch, emb)
@@ -46,7 +47,7 @@ class GRUEncoder(pl.LightningModule):
             assert isinstance(y, torch.Tensor)
             X = torch.cat([X, y[-1,:,:].unsqueeze(0)], dim=0)
         rev_emb = X @ self.embedding.weight.T
-        return tokenize.decode(rev_emb.argmax(dim=2).reshape(-1).detach().tolist())
+        return tokenizer.decode(rev_emb.argmax(dim=2).reshape(-1).detach().tolist())
         
     def training_step(self, batch, _) -> Tensor:
         X, y = batch[:, :-1], batch[:, 1:]
@@ -82,9 +83,36 @@ def get_default_tokenizer(lang:str):
         return transformers.AutoTokenizer.from_pretrained("skt/ko-gpt-trinity-1.2B-v0.5")
     else:
         tokenizer = transformers.AutoTokenizer.from_pretrained("gpt2")
-        added_count = tokenizer.add_special_tokens({"pad_token": "[PAD]"})
+        added_count = tokenizer.add_special_tokens({"pad_token": "<PAD>"})
         print(f"token added {added_count}")
-        tokenizer.pad_token_id = tokenizer.encode('[PAD]')
+        tokenizer.pad_token_id = tokenizer.encode('<PAD>')
         return tokenizer
 
+
+class Encoder:
+    def __init__(self):
+        pass
     
+    def encode(self, X, *args) -> tuple[torch.Tensor, torch.Tensor]:
+        raise NotImplementedError
+    
+class Decoder:
+    def __init__(self) -> None:
+        pass
+    
+    def init_state(self, enc_all_outputs, *args):
+        raise NotImplemented
+    
+    def decode(self, X, state=None):
+        raise NotImplemented
+    
+    
+class EncoderDecoder(pl.LightningModule):
+    def __init__(self, encoder, decoder) -> None:
+        super().__init__()
+        self.save_hyperparameters()
+        self.encoder = encoder
+        self.decoder = decoder
+        
+    def forward(self, enc_X, dec_X, *args):
+        enc_all_outputs = self
