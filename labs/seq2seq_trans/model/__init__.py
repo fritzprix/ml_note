@@ -77,25 +77,36 @@ class GRUModule(pl.LightningModule):
         return torch.optim.Adam(self.parameters(), self.lr)
     
     
-
-
-class Encoder(nn.Module):
+class Encoder(pl.LightningModule):
     def __init__(self, model: GRUModule):
         super().__init__()
+        self.save_hyperparameters(ignore=['model'])
         self.model = model
     
     def forward(self, X, *args):
         outputs, state = self.model(X, *args)
         return outputs, state
     
-class Decoder(nn.Module):
-    def __init__(self, model: GRUModule) -> None:
+class Decoder(pl.LightningModule):
+    def __init__(self, model: GRUModule, enc_hidden_size:int, dropout) -> None:
         super().__init__()
+        self.save_hyperparameters(ignore=['model'])
         self.model = model
+        context_size = model.gru.input_size + enc_hidden_size
+        self.ctx_merge_ff = nn.Sequential(*[
+            nn.Linear(context_size, model.gru.input_size * 2), nn.ReLU(), nn.Dropout(dropout),
+            nn.Linear(model.gru.input_size * 2, model.gru.input_size)
+        ])
         
+        self.hs_conv_ff = nn.Sequential(*[
+            nn.Linear(enc_hidden_size, enc_hidden_size * 2), nn.ReLU(), nn.Dropout(dropout),
+            nn.Linear(enc_hidden_size * 2, enc_hidden_size * 2), nn.ReLU() ,nn.Dropout(dropout), 
+            nn.Linear(enc_hidden_size * 2, model.gru.hidden_size)
+        ])
     
     def init_state(self, enc_all_outputs, *args):
-        return enc_all_outputs
+        outputs, hidden_state = enc_all_outputs
+        return outputs, hidden_state
     
     def forward(self, X, state=None):
         embs = self.model.embedding(X.t().long())
@@ -106,28 +117,33 @@ class Decoder(nn.Module):
         assert isinstance(context, torch.Tensor)
         context = context.repeat([embs.shape[0], 1, 1])
         embs_and_context = torch.cat((embs, context), -1)
-        outputs, hidden_state = self.model.gru(embs_and_context, hidden_state)
+        outputs, hidden_state = self.model.gru(self.ctx_merge_ff(embs_and_context), hidden_state)
         
         return outputs, [enc_output, hidden_state]
 
 
 class EncoderDecoder(pl.LightningModule):
-    def __init__(self, encoder: Encoder=None, decoder:Decoder=None,lr:float=1e-4) -> None:
+    def __init__(self, encoder: Encoder=None, decoder:Decoder=None, lr:float=1e-4, dropout:float=0.2, freeze:bool=True) -> None:
         super().__init__()
-        self.save_hyperparameters()
+        self.save_hyperparameters(ignore=['encoder', 'decoder'])
         if encoder is None:
             pre_trained = GRUModule.load_from_checkpoint('model/ko/model.ckpt')
-            pre_trained.freeze()
+            if freeze:
+                pre_trained.freeze()
             encoder = Encoder(pre_trained)
         
         if decoder is None:
             pre_trained = GRUModule.load_from_checkpoint('model/en/model.ckpt')
-            pre_trained.freeze()
-            decoder = Decoder(pre_trained)
+            if freeze:
+                pre_trained.freeze()
+            decoder = Decoder(pre_trained, encoder.model.gru.hidden_size, dropout)
             
         self.encoder = encoder
         self.decoder = decoder
+        
         self.lr = lr
+        self.loss = nn.CrossEntropyLoss(ignore_index=decoder.model.embedding.padding_idx)
+        self.fc = nn.Linear(decoder.model.gru.hidden_size, decoder.model.embedding.weight.shape[0])
         
     def forward(self, enc_X, dec_X, *args):
         enc_all_output = self.encoder(enc_X)
@@ -135,5 +151,51 @@ class EncoderDecoder(pl.LightningModule):
         output, state = self.decoder(dec_X, init_state)
         return output, state
     
+    def _calc_loss(self, batch) -> torch.Tensor:
+        from_seq_batch, to_seq_batch = batch
+        assert isinstance(from_seq_batch, torch.Tensor)
+        assert isinstance(to_seq_batch, torch.Tensor)
+        
+        dec_X, dec_Y = to_seq_batch[:, :-1], to_seq_batch[:,1:]
+        
+        output, _ = self(from_seq_batch, dec_X)
+        output = self.fc(output)
+        assert isinstance(output, torch.Tensor)
+        
+        return self.loss(output.transpose(0, 1).reshape(-1, output.shape[-1]), dec_Y.reshape(-1).long())
+    
+    def training_step(self, batch, _) -> torch.Tensor:
+        return self._calc_loss(batch)
+    
+    def training_epoch_end(self, outputs: list[dict[str:torch.Tensor]]) -> None:
+        avg_loss = torch.stack([o['loss'] for o in outputs]).mean()
+        self.log('train_loss', avg_loss)
+    
+    def validation_step(self, batch, _):
+        loss = self._calc_loss(batch)
+        return {"val_loss": loss}
+    
+    def validation_epoch_end(self, outputs: list[dict]) -> None:
+        avg_loss = torch.stack([o['val_loss'] for o in outputs]).mean()
+        self.log('val_loss', avg_loss)
+    
     def configure_optimizers(self) -> torch.optim.Optimizer:
         return torch.optim.Adam(self.parameters(), lr=self.lr)
+    
+    @torch.no_grad()
+    def predict_seq(self, tokens:list[int], bos:int, eos:int, max_steps:int=20) -> torch.Tensor:
+        enc_output = self.encoder(tokens)
+        dec_state = self.decoder.init_state(enc_all_outputs=enc_output)
+        dec_X = torch.Tensor(bos).reshape(1,1)
+        eos = torch.Tensor(eos)
+        for _ in range(max_steps):
+            output, dec_state = self.decoder(dec_X, dec_state)
+            output = self.fc(output).argmax(-1)
+            if output[-1] == eos:
+                break
+            dec_X = torch.concat((dec_X, output[-1].reshape(1,1)), dim=-1)
+        return output
+        
+        
+
+        
