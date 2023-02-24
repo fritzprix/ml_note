@@ -15,7 +15,7 @@ LANG_CHOICES = [
 def train_generative_task(args):
     assert args.lang.lower() in LANG_CHOICES
     tokenizer = get_default_tokenizer(args.lang)
-    pad_id = tokenizer.encode('<pad>')[0]
+    pad_id = tokenizer.encode('[PAD]')[0]
     collator = PaddingCollator(args.max_steps, tokenizer=tokenizer, pad_id=pad_id)
     if args.lang == 'ko':
         train_dataset = Korean('train')
@@ -24,7 +24,11 @@ def train_generative_task(args):
         train_dataset = English('train')
         val_dataset = English('validation')
     
-    encoder = GRUModule(tokenizer.vocab_size, 128, 128, padding_id=pad_id)
+    if args.from_saved:
+        encoder = GRUModule.load_from_checkpoint(f'model/{args.lang}/model.ckpt')
+        encoder.unfreeze()
+    else:
+        encoder = GRUModule(tokenizer.vocab_size, 128, 128, padding_id=pad_id)
     
     train_dataloader = data.DataLoader(train_dataset, batch_size=args.batch, shuffle=True, num_workers=os.cpu_count(), collate_fn=collator)
     val_dataloader = data.DataLoader(val_dataset, batch_size=args.batch, num_workers=os.cpu_count(), collate_fn=collator)
@@ -53,11 +57,11 @@ def train_seq2seq(args):
     
     collator = ParallelCollator(from_tokenizer=ko_tokenizer,
                      to_tokenizer=en_tokenizer, 
-                     from_pad_id=ko_tokenizer.encode('<pad>')[0], 
-                     to_pad_id=en_tokenizer.encode('<pad>')[0], 
-                     from_eos_id=ko_tokenizer.encode('<eos>')[0], 
-                     to_bos_id=en_tokenizer.encode('<bos>')[0], 
-                     to_eos_id=en_tokenizer.encode('<eos>')[0])
+                     from_pad_id=ko_tokenizer.encode('[PAD]')[0], 
+                     to_pad_id=en_tokenizer.encode('[PAD]')[0], 
+                     from_eos_id=ko_tokenizer.encode('[EOS]')[0], 
+                     to_bos_id=en_tokenizer.encode('[BOS]')[0], 
+                     to_eos_id=en_tokenizer.encode('[EOS]')[0])
     
     train_dataloader = data.DataLoader(train_dataset, batch_size=args.batch, num_workers=os.cpu_count(), collate_fn=collator, shuffle=True)
     val_dataloader = data.DataLoader(val_dataset, batch_size=args.batch, num_workers=os.cpu_count(), collate_fn=collator)
@@ -95,4 +99,5 @@ if __name__ == '__main__':
     arg_parser.add_argument('--batch', type=int, default=10)
     arg_parser.add_argument('--max_steps', type=int, default=1024)
     arg_parser.add_argument('--lr', type=float, default=1e-4)
+    arg_parser.add_argument('--from_saved', type=bool, default=False)
     main(arg_parser.parse_args())
